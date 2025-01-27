@@ -56,7 +56,8 @@ namespace Day1
 ## Example
 ### Input:
 ```
-Enter an integer: 123456
+Enter the number of which you want to find the count of odd and even digits.
+123456
 ```
 
 ### Output:
