@@ -7,8 +7,8 @@ using System;
 
 task1 t1= new task1();
 
-Console.WriteLine("Enter the number up to which you want to find the count of odd and even numbers.");
+Console.WriteLine("Enter the number of which you want to find the count of odd and even digits.");
 
 int number=Convert.ToInt32(Console.ReadLine());
 
-t1.countnum(number);
+t1.countdigit(number);

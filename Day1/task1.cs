@@ -10,24 +10,23 @@ namespace Day1
     public class task1
     {   
 
-        public void countnum(int num)
+        public void countdigit(int num)
         {
             int oddcount = 0;
             int evencount = 0;
-            for (int i = 1; i <= num; i++)
+            while (num > 0)
             {
-             if(i % 2 == 0)
-                {
+                int digit = Convert.ToInt32(num % 10); 
+                if (digit % 2 == 0)
                     evencount++;
-                }
                 else
-                {
-                    oddcount++;
-                }
 
+                    oddcount++; 
+
+                num /= 10; 
             }
-            Console.WriteLine($"The odd-count till the {num} is {oddcount} ");
-            Console.WriteLine($"The even-count till the {num} is {evencount} ");
+            Console.WriteLine($"The odd-count of the number is {oddcount} ");
+            Console.WriteLine($"The even-count of the number is {evencount} ");
         }
 
     }
