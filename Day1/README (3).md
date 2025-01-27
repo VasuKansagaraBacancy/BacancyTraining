@@ -61,8 +61,8 @@ Enter an integer: 123456
 
 ### Output:
 ```
-Count of Even digits: 3
-Count of Odd digits: 3
+The odd-count of the number is 3
+The even-count of the number is 3
 ```
 
 ## How to Run the Program
