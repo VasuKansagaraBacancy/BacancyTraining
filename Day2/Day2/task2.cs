@@ -36,6 +36,7 @@ namespace Day2
                     special = true;
                 }
             }
+
             if (upper && lower &&  digit && special) {
                 Console.WriteLine("valid password");
                 return true;
