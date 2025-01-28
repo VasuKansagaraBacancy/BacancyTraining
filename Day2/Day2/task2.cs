@@ -12,6 +12,7 @@ namespace Day2
         {
             if(pw.Length<8)
             {
+                Console.WriteLine("invalid password");
                 return false;
             }
             bool upper = false;
