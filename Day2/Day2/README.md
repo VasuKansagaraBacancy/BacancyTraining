@@ -80,8 +80,7 @@ namespace Day2
   **valid password**
 
 - If the password does not meet one or more criteria, the program will display:  
-  **invalid password**  
-  followed by a list of missing criteria.
+  **invalid password** 
   
 ## Example
 
