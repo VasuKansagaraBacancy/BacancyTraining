@@ -20,7 +20,6 @@ namespace Day1
                 if (digit % 2 == 0)
                     evencount++;
                 else
-
                     oddcount++; 
 
                 num /= 10; 
