@@ -24,15 +24,15 @@ namespace Day2
                 if (char.IsUpper(ch)) {
                     upper = true;
                 }
-                if (char.IsLower(ch))
+               else if (char.IsLower(ch))
                 {
                     lower = true;
                 }
-                if (char.IsDigit(ch))
+               else if (char.IsDigit(ch))
                 {
                     digit = true;
                 }
-                if (isspecial(ch))
+                else (isspecial(ch))
                 {
                     special = true;
                 }
