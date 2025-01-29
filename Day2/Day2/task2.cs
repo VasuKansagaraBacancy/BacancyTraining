@@ -32,7 +32,7 @@ namespace Day2
                 {
                     digit = true;
                 }
-                else (isspecial(ch))
+                else if(isspecial(ch))
                 {
                     special = true;
                 }
