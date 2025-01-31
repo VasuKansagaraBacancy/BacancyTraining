@@ -18,6 +18,7 @@ namespace schoolmanage
         public void ViewAllStudents()
         {
             Console.WriteLine("All Students:");
+            Console.WriteLine("............................................................");
             foreach (var student in students)
                 { 
                 Console.WriteLine($"\nName:{student.name}\nAge:{student.age}\nRollNumber:{student.rollnumber}\nClass:{student.assignedclass}\nAddress:{student.address}");

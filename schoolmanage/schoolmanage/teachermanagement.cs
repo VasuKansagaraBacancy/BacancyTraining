@@ -18,14 +18,19 @@ namespace schoolmanage
         public void ViewAllTeachers()
         {
             Console.WriteLine("All Teachers:");
+            Console.WriteLine("............................................................");
             foreach (var teacher in teachers)
-                Console.WriteLine($"Name:{teacher.name}\n ID:{teacher.tid}\nSubject:{teacher.subject}\nExperience:{teacher.experience}");
+            {
+                Console.WriteLine($"Name:{teacher.name}\nID:{teacher.tid}\nSubject:{teacher.subject}\nExperience:{teacher.experience}");
+                Console.WriteLine("............................................................");
+            }
         }
 
         public void SearchTeacher(int id1)
         {
             var teacher1 = teachers.FirstOrDefault(t => t.tid == id1);
             Console.WriteLine(teacher1 != null ? $"Name:{teacher1.name}\n ID:{teacher1.tid}\nSubject:{teacher1.subject}\nExperience:{teacher1.experience}" : "Teacher not found.");
+            Console.WriteLine("............................................................");
         }
 
         public void UpdateTeacher(int id)

@@ -8,11 +8,15 @@ namespace schoolmanage
 {
     public class standard
     {
-        public int standards;
+        public string standardname;
+        public string section;
+        public int  assignedteacherid;
 
-        public standard(int Standards)
+        public standard(string Standardname,string Section,int Assignedteacherid)
         {
-            standards=Standards;
+            standardname=Standardname;
+            section=Section;
+            assignedteacherid = Assignedteacherid;
         }
     }
 }
