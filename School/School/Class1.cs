@@ -89,7 +89,7 @@ public void ViewAllTeachers()
 
 public void UpdateTeacher(int id, string newName, string newSubject)
 {
-    var teacher = teachers.FirstOrDefault(t => t.Id == id);
+    var teacher ;
     if (teacher != null)
     {
         teacher.Name = newName;
@@ -104,7 +104,7 @@ public void UpdateTeacher(int id, string newName, string newSubject)
 
 public void DeleteTeacher(int id)
 {
-    var teacher = teachers.FirstOrDefault(t => t.Id == id);
+    var teacher;
     if (teacher != null)
     {
         teachers.Remove(teacher);
