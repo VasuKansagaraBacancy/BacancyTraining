@@ -8,17 +8,18 @@ namespace schoolmanage
 {
     public class teacher
     {
-        public int id;
+        public int tid;
         public string name;
         public string subject;
+        public string experience;
 
 
-        public teacher(int Id, string Name, string Subject)
+        public teacher(int Id, string Name, string Subject,string Experience)
         {
-            id = Id;
+            tid = Id;
             name = Name;
             subject = Subject;
-
+            experience = Experience;
         }
     }
 }

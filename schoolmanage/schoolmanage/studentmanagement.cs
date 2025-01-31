@@ -35,55 +35,47 @@ namespace schoolmanage
 
         public void UpdateStudent(int rollNumber)
         {
-            student student1 = null;
-            foreach (var s in students)
+            var student = students.FirstOrDefault(s => s.rollnumber == rollNumber);
+            if (student != null)
             {
-                if (s.rollnumber == rollNumber)
+                Console.WriteLine("Select the detail to update:");
+                Console.WriteLine("1. Name");
+                Console.WriteLine("2. Age");
+                Console.WriteLine("3. Class");
+                Console.WriteLine("4. Address");
+                Console.Write("Enter your choice: ");
+
+                int choice = Convert.ToInt32(Console.ReadLine());
+
+                switch (choice)
                 {
-                    student1 = s;
-                    break;
+                    case 1:
+                        Console.Write("Enter new Name: ");
+                        student.name = Console.ReadLine();
+                        break;
+                    case 2:
+                        Console.Write("Enter new Age: ");
+                        student.age = Convert.ToInt32(Console.ReadLine());
+                        break;
+                    case 3:
+                        Console.Write("Enter new Class: ");
+                        student.assignedclass = Console.ReadLine();
+                        break;
+                    case 4:
+                        Console.Write("Enter new Address: ");
+                        student.address = Console.ReadLine();
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice.");
+                        return;
                 }
-            }
 
-            if (student1 == null)
+                Console.WriteLine("Student details updated successfully.");
+            }
+            else
             {
-                Console.WriteLine("Student not found.");
-                return;
+                Console.WriteLine("Student not found");
             }
-
-            Console.WriteLine("Select the detail to update:");
-            Console.WriteLine("1. Name");
-            Console.WriteLine("2. Age");
-            Console.WriteLine("3. Class");
-            Console.WriteLine("4. Address");
-            Console.Write("Enter your choice: ");
-
-            int choice= Convert.ToInt32(Console.ReadLine());
-
-            switch (choice)
-            {
-                case 1:
-                    Console.Write("Enter new Name: ");
-                    student1.name = Console.ReadLine();
-                    break;
-                case 2:
-                    Console.Write("Enter new Age: ");
-                    student1.age = Convert.ToInt32(Console.ReadLine());
-                    break;
-                case 3:
-                    Console.Write("Enter new Class: ");
-                    student1.assignedclass = Console.ReadLine();
-                    break;
-                case 4:
-                    Console.Write("Enter new Address: ");
-                    student1.address = Console.ReadLine();
-                    break;
-                default:
-                    Console.WriteLine("Invalid choice.");
-                    return;
-            }
-
-            Console.WriteLine("Student details updated successfully.");
         }
 
         public void DeleteStudent(int rollNumber)
