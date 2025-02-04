@@ -24,8 +24,20 @@ namespace OOPS_Day1
             Console.WriteLine($"Item {name} is added at the price of {price} in the quantity of {stockQuantity}");
         }
 
-        public void addproduct(int productID, string name, decimal price, int stockQuantity)
+        public void addproduct()
         {
+            Console.WriteLine("Enter the Product ID");
+            int productID=Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Enter the Product Name");
+            string name = Console.ReadLine();
+
+            Console.WriteLine("Enter the price");
+            int price = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Enter the StockQuantity");
+            int stockQuantity = Convert.ToInt32(Console.ReadLine());
+
             Products.Add(new Product(productID, name, price, stockQuantity));
         }
         public int GetStockQuantity(int id)            
@@ -70,16 +82,17 @@ namespace OOPS_Day1
             {
                 Console.WriteLine(" Destructor called : Item  is out of stock");
             }         
-        }
-
-
-        //public void CreateProduct()
-        //{
-        //    Product penn = new Product(1, "Penn", 10, 100);
-        //    penn.UpdateStock(0);
-        //} 
-
-        
+        }   
         
     }
 }
+
+
+
+//public void CreateProduct()
+//{
+//    Product penn = new Product(1, "Penn", 10, 100);
+//    penn.UpdateStock(0);
+//} 
+
+
