@@ -30,7 +30,7 @@ Console.WriteLine("Enter the words:");
 for (int i = 0; i < wordCount; i++)
 {
     words.Add(Console.ReadLine());
-}
+}       
 
 Console.WriteLine("Before Sorting: ");
 t3.Displaylist(words);
