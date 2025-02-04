@@ -13,5 +13,10 @@ pen.UpdateStock(0);
 
 Console.WriteLine("Stock of the Pencil is "+ pencil.GetStockQuantity());
 
+//pen.CreateProduct();
+//GC.Collect();
+//GC.WaitForPendingFinalizers();
+
+Console.ReadKey();
 
 

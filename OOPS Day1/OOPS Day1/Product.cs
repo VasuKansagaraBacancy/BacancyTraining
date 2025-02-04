@@ -8,18 +8,14 @@ namespace OOPS_Day1
 {
     public class Product
     {
-        public int ProductID;
-        public string Name;
-        public decimal Price;
+        private int ProductID;
+        private string Name;
+        private decimal Price;
         private int StockQuantity;
-
         public int GetStockQuantity()            
         {
             return StockQuantity;
         }
-
-      
-
 
         public void UpdateStock(int quantity)
         {
@@ -56,6 +52,15 @@ namespace OOPS_Day1
             }
             
         }
+
+
+        //public void CreateProduct()
+        //{
+        //    Product penn = new Product(1, "Penn", 10, 100);
+        //    penn.UpdateStock(0);
+        //} 
+
+
         
     }
 }
