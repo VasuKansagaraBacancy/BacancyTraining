@@ -8,9 +8,10 @@ Product laptop = new Product(4, "Laptop", 50000,80);
 Product bag = new Product(5,"Bag",500, 500);
 
 
+pencil.UpdateStock(500);
 pen.UpdateStock(0);
-Console.WriteLine("Stock of the Pencil is"+pencil.GetStockQuantity());
 
-GC.Collect();
-GC.WaitForPendingFinalizers();
+Console.WriteLine("Stock of the Pencil is "+ pencil.GetStockQuantity());
+
+
 
