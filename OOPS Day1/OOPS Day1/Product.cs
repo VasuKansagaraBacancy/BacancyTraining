@@ -14,15 +14,14 @@ namespace OOPS_Day1
         private int StockQuantity;
 
         public List<Product> Products=new List<Product>();
-
         public Product() {}
         public Product(int productID, string name, decimal price, int stockQuantity)
         {
-            Console.WriteLine($"Item {name} is added at the price of {price} in the quantity of {stockQuantity}");
             ProductID = productID;
             Name = name;
             Price = price;
             StockQuantity=stockQuantity;
+            Console.WriteLine($"Item {name} is added at the price of {price} in the quantity of {stockQuantity}");
         }
 
         public void addproduct(int productID, string name, decimal price, int stockQuantity)
