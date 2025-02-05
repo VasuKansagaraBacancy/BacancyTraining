@@ -19,7 +19,6 @@ namespace OOPS_Day1
             Name = name;
             Price = price;
             StockQuantity = stockQuantity;
-            Console.WriteLine($"Item '{name}' is added at the price of {price} with a quantity of {stockQuantity}.");
         }
         public void AddProduct()
         {
@@ -38,6 +37,7 @@ namespace OOPS_Day1
                 int stockQuantity = Convert.ToInt32(Console.ReadLine());
 
                 Products.Add(new Product(productID, name, price, stockQuantity));
+                Console.WriteLine($"Item '{name}' is added at the price of {price} with a quantity of {stockQuantity}.");
             }
             catch (Exception ex)
             {
