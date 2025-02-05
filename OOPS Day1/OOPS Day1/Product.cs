@@ -21,7 +21,6 @@ namespace OOPS_Day1
             StockQuantity = stockQuantity;
             Console.WriteLine($"Item '{name}' is added at the price of {price} with a quantity of {stockQuantity}.");
         }
-
         public void AddProduct()
         {
             try
@@ -39,7 +38,6 @@ namespace OOPS_Day1
                 int stockQuantity = Convert.ToInt32(Console.ReadLine());
 
                 Products.Add(new Product(productID, name, price, stockQuantity));
-                Console.WriteLine("Product added successfully!");
             }
             catch (Exception ex)
             {
@@ -91,13 +89,13 @@ namespace OOPS_Day1
                 Console.WriteLine($"An error occurred: {ex.Message}");
             }
         }
-
         ~Product()
         {
             if (StockQuantity == 0)
             {
                 Console.WriteLine("Destructor called: Item is out of stock.");
             }
-        }
+        }           
+
     }
 }
