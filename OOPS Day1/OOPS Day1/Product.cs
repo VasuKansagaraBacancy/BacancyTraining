@@ -10,8 +10,7 @@ namespace OOPS_Day1
         private decimal Price { get; set; }
         private int StockQuantity { get; set; }
 
-        public List<Product> Products = new List<Product>();
-
+        private List<Product> Products = new List<Product>();
         public Product() { }
 
         public Product(int productID, string name, decimal price, int stockQuantity)
@@ -85,8 +84,7 @@ namespace OOPS_Day1
                         return;
                     }
                 }
-
-                Console.WriteLine("Product ID not found.");
+               Console.WriteLine("Product ID not found.");
             }
             catch (Exception ex)
             {
