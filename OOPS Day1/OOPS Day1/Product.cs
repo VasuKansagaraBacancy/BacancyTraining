@@ -1,98 +1,105 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OOPS_Day1
 {
-    public class Product    
+    public class Product
     {
-        private int ProductID;
-        private string Name;
-        private decimal Price;
-        private int StockQuantity;
+        private int ProductID { get; set; }
+        private string Name { get; set; }
+        private decimal Price { get; set; }
+        private int StockQuantity { get; set; }
 
-        public List<Product> Products=new List<Product>();
-        public Product() {}
+        public List<Product> Products = new List<Product>();
+
+        public Product() { }
+
         public Product(int productID, string name, decimal price, int stockQuantity)
         {
             ProductID = productID;
             Name = name;
             Price = price;
-            StockQuantity=stockQuantity;
-            Console.WriteLine($"Item {name} is added at the price of {price} in the quantity of {stockQuantity}");
+            StockQuantity = stockQuantity;
+            Console.WriteLine($"Item '{name}' is added at the price of {price} with a quantity of {stockQuantity}.");
         }
 
-        public void addproduct()
+        public void AddProduct()
         {
-            Console.WriteLine("Enter the Product ID");
-            int productID=Convert.ToInt32(Console.ReadLine());
+            try
+            {
+                Console.WriteLine("Enter the Product ID:");
+                int productID = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("Enter the Product Name");
-            string name = Console.ReadLine();
+                Console.WriteLine("Enter the Product Name:");
+                string name = Console.ReadLine();
 
-            Console.WriteLine("Enter the price");
-            int price = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Enter the price:");
+                decimal price = Convert.ToDecimal(Console.ReadLine());
 
-            Console.WriteLine("Enter the StockQuantity");
-            int stockQuantity = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Enter the Stock Quantity:");
+                int stockQuantity = Convert.ToInt32(Console.ReadLine());
 
-            Products.Add(new Product(productID, name, price, stockQuantity));
+                Products.Add(new Product(productID, name, price, stockQuantity));
+                Console.WriteLine("Product added successfully!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
         }
-        public int GetStockQuantity(int id)            
+
+        public int GetStockQuantity(int id)
         {
             foreach (Product p in Products)
             {
-                if (p.ProductID==id)
+                if (p.ProductID == id)
                 {
-                    return StockQuantity; 
+                    return p.StockQuantity; 
                 }
             }
-            Console.WriteLine("Enter valid Product ID");
-            return -1;       
+            Console.WriteLine("Invalid Product ID.");
+            return -1;
         }
 
         public void UpdateStock(int id, int quantity)
         {
-            if (quantity>=0)
+            try
             {
-                foreach(Product p in Products)
+                if (quantity < 0)
                 {
-                  if(p.ProductID==id)
-                    {
-                        StockQuantity = quantity;
-                        Console.WriteLine($"Updated Stock quantity of {p.Name} :{p.StockQuantity}");
-                    }
-                }               
-            }
-            else
-            {
-                Console.WriteLine("Stock quantity cannot be negative");                
-            }
-           if(quantity==0)
-                {
-                Console.WriteLine($"Item No. {id} is out of stock");
+                    Console.WriteLine("Stock quantity cannot be negative.");
+                    return;
+                }
 
+                foreach (Product p in Products)
+                {
+                    if (p.ProductID == id)
+                    {
+                        p.StockQuantity = quantity;
+                        Console.WriteLine($"Updated Stock Quantity of '{p.Name}': {p.StockQuantity}");
+
+                        if (quantity == 0)
+                        {
+                            Console.WriteLine($"Item '{p.Name}' (ID: {id}) is out of stock.");
+                        }
+                        return;
+                    }
+                }
+
+                Console.WriteLine("Product ID not found.");
             }
-        }                   
-        ~Product() 
-        {         
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
+
+        ~Product()
+        {
             if (StockQuantity == 0)
             {
-                Console.WriteLine(" Destructor called : Item  is out of stock");
-            }         
-        }   
-        
+                Console.WriteLine("Destructor called: Item is out of stock.");
+            }
+        }
     }
 }
-
-
-
-//public void CreateProduct()
-//{
-//    Product penn = new Product(1, "Penn", 10, 100);
-//    penn.UpdateStock(0);
-//} 
-
-
