@@ -22,6 +22,5 @@ namespace OOPS_Day2
             base.DisplayInfo();
             Console.WriteLine($"ItemExpiry : {_expiration_date}");
         }
-
     }
 }
