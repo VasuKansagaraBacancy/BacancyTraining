@@ -40,12 +40,12 @@ namespace OOPS_Day2
         {
             try
             {
-                var product = products.FirstOrDefault(p => p._ItemID == productID);
+                var product = products.FirstOrDefault(p => p.ItemID == productID);
                 if (product != null)
                 {
                     products.Remove(product);
-                    Console.WriteLine($"Product {product._Name} removed.");
-                    stockLogger.LogStockUpdate(product._ItemID, product._stock, "Removed");
+                    Console.WriteLine($"Product {product.Name} removed.");
+                    stockLogger.LogStockUpdate(product.ItemID, product.Stock, "Removed");
                 }
                 else
                 {
@@ -63,7 +63,7 @@ namespace OOPS_Day2
     {
         public void UpdateStock(int productID, int quantity, bool isRestock)
         {
-            var product = products.FirstOrDefault(p => p._ItemID == productID);
+            var product = products.FirstOrDefault(p => p.ItemID == productID);
             if (product != null)
             {
                 product.UpdateStock(quantity, isRestock);

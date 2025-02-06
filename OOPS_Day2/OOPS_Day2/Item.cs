@@ -8,16 +8,16 @@ namespace OOPS_Day2
 {
     public class Item
     {
-        public int _ItemID { get; set; }
-        public string _Name { get; set;}
+        public int ItemID { get;private set; }
+        public string Name { get;private set;}
         public Item(int itemID, string name)
         {
-            _ItemID=itemID;
-            _Name=name;
+            ItemID=itemID;
+            Name=name;
         }
         public virtual void DisplayInfo()
         {
-            Console.WriteLine($"ItemID : {_ItemID}\nItemName : {_Name}");
+            Console.WriteLine($"ItemID : {ItemID}\nItemName : {Name}");
         }
     }
 }
