@@ -12,35 +12,49 @@ namespace OOPS_Day2
         private List<Product> products = new List<Product>();
         public void AddProduct(StockLogger stockLogger)
         {
-            Console.WriteLine("Enter the Product ID");
-            int ItemID=Convert.ToInt32(Console.ReadLine());
+            try
+            {
+                Console.WriteLine("Enter the Product ID:");
+                int itemID = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("Enter the Product Name");
-            string Name=Console.ReadLine();
+                Console.WriteLine("Enter the Product Name:");
+                string name = Console.ReadLine();
 
-            Console.WriteLine("Enter the Product Price");
-            int price=Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Enter the Product Price:");
+                int price = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("Enter the Product Stock");
-            int stock=Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Enter the Product Stock:");
+                int stock = Convert.ToInt32(Console.ReadLine());
 
-            products.Add(new Product(ItemID, Name, price, stock));
-            Console.WriteLine("Product Added.");
-            stockLogger.LogStockUpdate(ItemID,stock, "Added");
+                products.Add(new Product(itemID, name, price, stock));
+                Console.WriteLine("Product Added.");
+                stockLogger.LogStockUpdate(itemID, stock, "Added");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error adding product: {ex.Message}");
+            }
         }
 
         public void RemoveProduct(int productID, StockLogger stockLogger)
         {
-            var product = products.FirstOrDefault(p => p._ItemID == productID);
-            if (product != null)
+            try
             {
-                Console.WriteLine($"Product {product._Name} removed.");
-                stockLogger.LogStockUpdate(product._ItemID, product._stock, "Removed");
-                products.Remove(product);
+                var product = products.FirstOrDefault(p => p._ItemID == productID);
+                if (product != null)
+                {
+                    products.Remove(product);
+                    Console.WriteLine($"Product {product._Name} removed.");
+                    stockLogger.LogStockUpdate(product._ItemID, product._stock, "Removed");
+                }
+                else
+                {
+                    Console.WriteLine("Product not found.");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Console.WriteLine("Product not found.");
+                Console.WriteLine($"Error removing product: {ex.Message}");
             }
         }
     }

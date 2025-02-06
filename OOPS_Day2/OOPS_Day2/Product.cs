@@ -25,14 +25,26 @@ namespace OOPS_Day2
         }
         public void UpdateStock(int quantity,bool isRestock)
         {
-            if (isRestock) {
-                _stock += quantity;
+            try
+            {
+                if (isRestock)
+                {
+                    _stock += quantity;
+                }
+                else if (_stock >= quantity)
+                {
+                    _stock -= quantity;
+                }
+                else
+                {
+                    Console.WriteLine("Insufficient stock!");
+                    return;
+                }
                 Console.WriteLine($"Stock updated. New Stock: {_stock}");
             }
-            else
+            catch (Exception ex)
             {
-                _stock -= quantity;
-                Console.WriteLine($"Stock updated. New Stock: {_stock}");
+                Console.WriteLine($"Error updating stock: {ex.Message}");
             }
         }
         public override void DisplayInfo()
