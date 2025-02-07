@@ -28,7 +28,7 @@ namespace OOPS_Day2
                     switch (choice)
                     {
                         case 1:
-                            inventoryManager.AddProduct(stockLogger);
+                            ((IInventoryOperations)inventoryManager).AddProduct(stockLogger);
                             break;
                         case 2:
                             Console.WriteLine("\n--- Inventory Products ---");
@@ -46,7 +46,7 @@ namespace OOPS_Day2
                         case 4:
                             Console.Write("Enter Product ID to Remove: ");
                             int removeId = Convert.ToInt32(Console.ReadLine());
-                            inventoryManager.RemoveProduct(removeId, stockLogger);
+                            ((IInventoryOperations)inventoryManager).RemoveProduct(removeId,stockLogger);
                             break;
                         case 5:
                             Console.WriteLine("\n--- Stock Logs ---");
@@ -69,5 +69,3 @@ namespace OOPS_Day2
         }
     }
 }
-
-

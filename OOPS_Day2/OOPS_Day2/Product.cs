@@ -52,12 +52,10 @@ namespace OOPS_Day2
             base.DisplayInfo();
             Console.WriteLine($"ItemPrice : {Price}\nItemStock : {Stock}");
         }
-
         public int CalculateStockValue()
         {
             return Price * Stock;
         }
-
         public void PrintInventoryReport()
         {
             Console.WriteLine($"Inventory Report for Product: {Name}, Stock Value: {CalculateStockValue()}");

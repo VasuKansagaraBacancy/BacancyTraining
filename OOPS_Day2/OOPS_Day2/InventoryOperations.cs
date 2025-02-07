@@ -11,6 +11,5 @@ namespace OOPS_Day2
         void AddProduct(StockLogger stockLogger);
         void RemoveProduct(int productID, StockLogger stockLogger);
         void DisplayProducts();
-    }
-   
+    } 
 }

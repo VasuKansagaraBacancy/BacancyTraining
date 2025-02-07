@@ -10,7 +10,7 @@ namespace OOPS_Day2
     partial class InventoryManager : IInventoryOperations
     {
         private List<Product> products = new List<Product>();
-        public void AddProduct(StockLogger stockLogger)
+        void IInventoryOperations.AddProduct(StockLogger stockLogger)
         {
             try
             {
@@ -35,8 +35,7 @@ namespace OOPS_Day2
                 Console.WriteLine($"Error adding product: {ex.Message}");
             }
         }
-
-        public void RemoveProduct(int productID, StockLogger stockLogger)
+        void IInventoryOperations.RemoveProduct(int productID, StockLogger stockLogger)
         {
             try
             {
@@ -58,7 +57,6 @@ namespace OOPS_Day2
             }
         }
     }
-
     partial class InventoryManager : IInventoryOperations
     {
         public void UpdateStock(int productID, int quantity, bool isRestock)
@@ -77,5 +75,4 @@ namespace OOPS_Day2
             }
         }
     }
-
 }
