@@ -1,7 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-
-using Day3;
+﻿using Day3;
 
 Task3 t3 = new Task3();
 
@@ -16,7 +13,6 @@ for (int i = 0; i < numCount; i++)
 
 Console.WriteLine("Before Sorting: ");
 t3.Displaylist(numbers);
-
 t3.Sortlist(numbers);
 
 Console.WriteLine("After Sorting: ");
