@@ -10,7 +10,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace OOPS_Day2
 {
-    public class PerishableProduct : Item
+    public class PerishableProduct : Item, IInventoryItem
     {
         private DateTime _expiration_date;
         public PerishableProduct(int ItemID,string Name, DateTime expiration_date) : base(ItemID, Name)
@@ -21,6 +21,14 @@ namespace OOPS_Day2
         {
             base.DisplayInfo();
             Console.WriteLine($"ItemExpiry : {_expiration_date}");
+        }
+        public int CalculateStockValue()
+        {
+            return 0;
+        }
+        public void PrintInventoryReport()
+        {
+            Console.WriteLine($"Inventory Report for Product: {Name}, Stock Value: {CalculateStockValue()}");
         }
     }
 }
