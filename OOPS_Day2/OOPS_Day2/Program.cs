@@ -17,9 +17,9 @@ namespace OOPS_Day2
                 Console.WriteLine("1. Add Product");
                 Console.WriteLine("2. Display Products");
                 Console.WriteLine("3. Update Stock");
-                Console.WriteLine("4. Remove Product");
-                Console.WriteLine("5. View Stock Logs");
-                Console.WriteLine("6. Generate Inventory Report");
+                Console.WriteLine("4. Generate Inventory Report");
+                Console.WriteLine("5. Remove Product");
+                Console.WriteLine("6. View Stock Logs");
                 Console.WriteLine("7. Exit");
                 Console.Write("Enter your choice: ");
 
