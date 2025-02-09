@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace OOPS_Day2
 {
@@ -18,7 +19,8 @@ namespace OOPS_Day2
                 Console.WriteLine("3. Update Stock");
                 Console.WriteLine("4. Remove Product");
                 Console.WriteLine("5. View Stock Logs");
-                Console.WriteLine("6. Exit");
+                Console.WriteLine("6. Generate Inventory Report");
+                Console.WriteLine("7. Exit");
                 Console.Write("Enter your choice: ");
 
                 try
@@ -44,15 +46,22 @@ namespace OOPS_Day2
                             inventoryManager.UpdateStock(productId, quantity, isRestock);
                             break;
                         case 4:
-                            Console.Write("Enter Product ID to Remove: ");
-                            int removeId = Convert.ToInt32(Console.ReadLine());
-                            ((IInventoryOperations)inventoryManager).RemoveProduct(removeId,stockLogger);
+                            Console.WriteLine("\n--- Inventory Report ---");
+                            foreach (var product in inventoryManager.GetProducts())
+                            {
+                                product.PrintInventoryReport();
+                            }
                             break;
                         case 5:
+                            Console.Write("Enter Product ID to Remove: ");
+                            int removeId = Convert.ToInt32(Console.ReadLine());
+                            ((IInventoryOperations)inventoryManager).RemoveProduct(removeId, stockLogger);
+                            break;
+                        case 6:
                             Console.WriteLine("\n--- Stock Logs ---");
                             stockLogger.PrintAllLogs();
                             break;
-                        case 6:
+                        case 7:
                             exit = true;
                             Console.WriteLine("Exiting program...");
                             break;
@@ -63,7 +72,7 @@ namespace OOPS_Day2
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error Occured{ex.Message}");
+                    Console.WriteLine($"Error Occurred: {ex.Message}");
                 }
             }
         }

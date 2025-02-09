@@ -10,6 +10,10 @@ namespace OOPS_Day2
     partial class InventoryManager : IInventoryOperations
     {
         private List<Product> products = new List<Product>();
+        public List<Product> GetProducts()
+        {
+            return products;
+        }
         void IInventoryOperations.AddProduct(StockLogger stockLogger)
         {
             try
