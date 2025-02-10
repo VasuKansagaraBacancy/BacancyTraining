@@ -1,6 +1,5 @@
 ﻿using OOPS_Day3;
 using static OOPS_Day3.SmsNotification;
-
 class Program
 {
     static void Main()
