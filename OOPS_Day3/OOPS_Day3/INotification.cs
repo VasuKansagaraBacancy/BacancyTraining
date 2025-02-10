@@ -23,7 +23,7 @@ namespace OOPS_Day3
         {
             Console.WriteLine("Sending SMS: " + message);
         }
-    public class PushNotification : INotification  
+    class PushNotification : INotification  
         {
             public void send(string message)
             {
