@@ -8,7 +8,7 @@ namespace LINQ_Day1
 {
     public class PlayerManagement
     {
-        public List<Player> GetPlayers()
+        public static List<Player> GetPlayers()
         {
             return new List<Player> {
             new Player(1, "Virat Kohli", "India", 8, new List<int> { 45, 67, 198, 102, 56, 178, 195, 110 }),
@@ -110,7 +110,7 @@ namespace LINQ_Day1
             Console.WriteLine($"Highest Scorer: {highestScorer}");
             Console.WriteLine($"Lowest Scorer: {lowestScorer}");
         }
-        public void Methodtotalthenby(List<Player> players)
+        public void MethodTotalThenby(List<Player> players)
         {
             var sortedPlayers = players.OrderByDescending(p => p.Scores.Sum()).ThenBy(p => p.Name);
             Console.WriteLine("\nPlayers sorted by total scores:");
@@ -119,7 +119,7 @@ namespace LINQ_Day1
                 Console.WriteLine($"{player.Name} - {player.Scores.Sum()} Runs");
             }
         }
-        public void Querytotalthenby(List<Player> players)
+        public void QueryTotalThenby(List<Player> players)
         {
             var sortedPlayers = from p in players
                                 orderby p.Scores.Sum() descending, p.Name

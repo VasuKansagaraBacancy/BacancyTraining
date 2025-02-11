@@ -6,7 +6,7 @@ class Program
     static void Main()
     {
         PlayerManagement player = new PlayerManagement();
-        List<Player> players = player.GetPlayers();
+        List<Player> players = PlayerManagement.GetPlayers();
         player.DisplayPlayers(players);
         Console.WriteLine("-------Players who have played more than 5 matches-----");
         player.MethodMatchesGreaterthanFive(players);
@@ -19,7 +19,7 @@ class Program
         Console.WriteLine("-------Player with the highest and lowest total score-----");
         player.MethodTotalHighestLowest(players);
         Console.WriteLine("-------Players sorted by total scores (descending) and then by name-----");
-        player.Methodtotalthenby(players);
+        player.MethodTotalThenby(players);
         Console.WriteLine("-------Group players by team and all player names under each team-----");
         player.MethodGroupbyteam(players);
         Console.WriteLine("-------Average score of all players is-----");

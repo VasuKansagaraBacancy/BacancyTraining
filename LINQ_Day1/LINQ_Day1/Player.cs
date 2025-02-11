@@ -19,7 +19,7 @@ namespace LINQ_Day1
             Name = name; 
             Team = team; 
             MatchesPlayed = matchesplayed;
-            Scores = new List<int>(scores);
+            Scores = scores;
         }
     }
 }
