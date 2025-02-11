@@ -21,7 +21,7 @@ class Program
         Console.WriteLine("-------Players sorted by total scores (descending) and then by name-----");
         player.MethodTotalThenby(players);
         Console.WriteLine("-------Group players by team and all player names under each team-----");
-        player.MethodGroupbyteam(players);
+        player.MethodGroupByTeam(players);
         Console.WriteLine("-------Average score of all players is-----");
         player.MethodAvgScore(players);
         Console.WriteLine("-------Total number of matches played by all players combined-----");

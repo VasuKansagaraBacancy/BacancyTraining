@@ -35,161 +35,316 @@ namespace LINQ_Day1
         }
         public void DisplayPlayers(List<Player> players)
         {
+            if (players == null || players.Count == 0)
+            {
+                Console.WriteLine("No players available.");
+                return;
+            }
             foreach (var player in players)
             {
+                if (player == null)
+                    continue;
                 Console.WriteLine($"Id: {player.Id}, Name: {player.Name}, Country: {player.Team}, Matches: {player.MatchesPlayed}");
-                Console.WriteLine("Scores: " + string.Join(", ", player.Scores));
+                Console.WriteLine("Scores: " + (player.Scores != null ? string.Join(", ", player.Scores) : "No scores available"));
                 Console.WriteLine("-----------------------------");
             }
         }
         public void MethodMatchesGreaterthanFive(List<Player> players)
         {
-            List<Player> matchesgreaterthanfive = players.Where(p => p.MatchesPlayed > 5).ToList();
+            if (players == null)
+            {
+                Console.WriteLine("Player list is null.");
+                return;
+            }
+            List<Player> matchesgreaterthanfive = players.Where(p => p != null && p.MatchesPlayed > 5).ToList();
             DisplayPlayers(matchesgreaterthanfive);
         }
         public void QueryMatchesGreaterthanFive(List<Player> players)
         {
+            if (players == null)
+            {
+                Console.WriteLine("Player list is null.");
+                return;
+            }
+
             List<Player> matchesgreaterthanfive = (from p in players
-                                                   where p.MatchesPlayed > 5
+                                                   where p != null && p.MatchesPlayed > 5
                                                    select p).ToList();
             DisplayPlayers(matchesgreaterthanfive);
         }
         public void MethodPlayerData(List<Player> players)
         {
-            var playerdata = players.Select(p => (p.Name, p.Team));
+            if (players == null)
+            {
+                Console.WriteLine("Player list is null.");
+                return;
+            }
+            var playerdata = players
+                .Where(p => p != null)
+                .Select(p => (p.Name ?? "Unknown", p.Team ?? "Unknown"));
             foreach (var player in playerdata)
             {
-                Console.WriteLine($"Name: {player.Name}\nTeam: {player.Team}\n----------");
+                Console.WriteLine($"Name: {player.Item1}\nTeam: {player.Item2}\n----------");
             }
         }
         public void QueryPlayerData(List<Player> players)
         {
-            var playerdata = (from p in players
-                              select (p.Name, p.Team));
+            if (players == null)
+            {
+                Console.WriteLine("Player list is null.");
+                return;
+            }
+            var playerdata = from p in players
+                             where p != null
+                             select (p.Name ?? "Unknown", p.Team ?? "Unknown");
             foreach (var player in playerdata)
             {
-                Console.WriteLine($"Name: {player.Name}\nTeam: {player.Team}\n----------");
+                Console.WriteLine($"Name: {player.Item1}\nTeam: {player.Item2}\n----------");
             }
         }
         public void MethodAllScores(List<Player> players)
         {
-            var allscores = players.SelectMany(p => p.Scores);
-            Console.WriteLine(string.Join(", ", allscores));
+            if (players == null)
+            {
+                Console.WriteLine("Player list is null.");
+                return;
+            }
+            var allscores = players
+                .Where(p => p != null && p.Scores != null)
+                .SelectMany(p => p.Scores);
+            Console.WriteLine(allscores.Any() ? string.Join(", ", allscores) : "No scores available.");
         }
         public void QueryAllScores(List<Player> players)
         {
-            var allscores = (from p in players
-                             from score in p.Scores
-                             select score);
-            Console.WriteLine(string.Join(", ", allscores));
+            if (players == null)
+            {
+                Console.WriteLine("Player list is null.");
+                return;
+            }
+            var allscores = from p in players
+                            where p != null && p.Scores != null
+                            from score in p.Scores
+                            select score;
+            Console.WriteLine(allscores.Any() ? string.Join(", ", allscores) : "No scores available.");
         }
         public void MethodTotalPlayers(List<Player> players)
         {
-            Console.WriteLine($"Total number of players: {players.Count()}");
+            Console.WriteLine($"Total number of players: {(players != null ? players.Count : 0)}");
         }
         public void QueryTotalPlayers(List<Player> players)
         {
-            int totalPlayers = (from player in players select player).Count();
+            int totalPlayers = players != null ? (from player in players select player).Count() : 0;
             Console.WriteLine($"Total number of players: {totalPlayers}");
         }
         public void MethodTotalHighestLowest(List<Player> players)
         {
-            var highestScorer = players.OrderByDescending(p => p.Scores.Sum()).First().Name;
-            var lowestScorer = players.OrderBy(p => p.Scores.Sum()).First().Name;
-            Console.WriteLine($"Highest Scorer :{highestScorer}");
-            Console.WriteLine($"Lowest Scorer :{lowestScorer}");
+            if (players == null || players.Count == 0)
+            {
+                Console.WriteLine("No players available.");
+                return;
+            }
+            var validPlayers = players
+                .Where(p => p != null && p.Scores != null && p.Scores.Any())
+                .ToList();
+            if (validPlayers.Count == 0)
+            {
+                Console.WriteLine("No players with valid scores.");
+                return;
+            }
+            var highestScorer = validPlayers.OrderByDescending(p => p.Scores.Sum()).FirstOrDefault()?.Name ?? "Unknown";
+            var lowestScorer = validPlayers.OrderBy(p => p.Scores.Sum()).FirstOrDefault()?.Name ?? "Unknown";
+            Console.WriteLine($"Highest Scorer: {highestScorer}");
+            Console.WriteLine($"Lowest Scorer: {lowestScorer}");
         }
         public void QueryTotalHighestLowest(List<Player> players)
         {
-            var highestScorer = (from p in players
+            if (players == null || players.Count == 0)
+            {
+                Console.WriteLine("No players available.");
+                return;
+            }
+            var validPlayers = players
+                .Where(p => p != null && p.Scores != null && p.Scores.Any())
+                .ToList();
+            if (validPlayers.Count == 0)
+            {
+                Console.WriteLine("No players with valid scores.");
+                return;
+            }
+            var highestScorer = (from p in validPlayers
                                  orderby p.Scores.Sum() descending
-                                 select p.Name).First();
-            var lowestScorer = (from p in players
+                                 select p.Name ?? "Unknown").FirstOrDefault();
+            var lowestScorer = (from p in validPlayers
                                 orderby p.Scores.Sum()
-                                select p.Name).First();
+                                select p.Name ?? "Unknown").FirstOrDefault();
             Console.WriteLine($"Highest Scorer: {highestScorer}");
             Console.WriteLine($"Lowest Scorer: {lowestScorer}");
         }
         public void MethodTotalThenby(List<Player> players)
         {
-            var sortedPlayers = players.OrderByDescending(p => p.Scores.Sum()).ThenBy(p => p.Name);
+            if (players == null || players.Count == 0)
+            {
+                Console.WriteLine("No players available.");
+                return;
+            }
+            var sortedPlayers = players
+                .Where(p => p != null && p.Scores != null) 
+                .OrderByDescending(p => p.Scores.Any() ? p.Scores.Sum() : 0) 
+                .ThenBy(p => p.Name ?? "Unknown"); 
             Console.WriteLine("\nPlayers sorted by total scores:");
             foreach (var player in sortedPlayers)
             {
-                Console.WriteLine($"{player.Name} - {player.Scores.Sum()} Runs");
+                Console.WriteLine($"{player.Name ?? "Unknown"} - {(player.Scores.Any() ? player.Scores.Sum() : 0)} Runs");
             }
         }
         public void QueryTotalThenby(List<Player> players)
         {
+            if (players == null || players.Count == 0)
+            {
+                Console.WriteLine("No players available.");
+                return;
+            }
             var sortedPlayers = from p in players
-                                orderby p.Scores.Sum() descending, p.Name
+                                where p != null && p.Scores != null
+                                orderby (p.Scores.Any() ? p.Scores.Sum() : 0) descending, p.Name ?? "Unknown"
                                 select p;
             Console.WriteLine("\nPlayers sorted by total scores:");
             foreach (var player in sortedPlayers)
             {
-                Console.WriteLine($"{player.Name} - {player.Scores.Sum()} Runs");
+                Console.WriteLine($"{player.Name ?? "Unknown"} - {(player.Scores.Any() ? player.Scores.Sum() : 0)} Runs");
             }
         }
-        public void MethodGroupbyteam(List<Player> players)
+        public void MethodGroupByTeam(List<Player> players)
         {
-            var groupedByTeam = players.GroupBy(p => p.Team).Select(g => new { Team = g.Key, Players = g.Select(p => p.Name) });
+            if (players == null || players.Count == 0)
+            {
+                Console.WriteLine("No players available.");
+                return;
+            }
+            var groupedByTeam = players
+                .Where(p => p != null) 
+                .GroupBy(p => p.Team ?? "Unknown Team") 
+                .Select(g => new { Team = g.Key, Players = g.Select(p => p.Name ?? "Unknown Player") });
             foreach (var group in groupedByTeam)
             {
                 Console.WriteLine(group.Team + ": " + string.Join(", ", group.Players));
             }
         }
-        public void QueryGroupbyteam(List<Player> players)
+        public void QueryGroupByTeam(List<Player> players)
         {
+            if (players == null || players.Count == 0)
+            {
+                Console.WriteLine("No players available.");
+                return;
+            }
             var groupedByTeam = from p in players
-                                group p by p.Team into teamGroup
-                                select new { Team = teamGroup.Key, Players = teamGroup.Select(p => p.Name) };
-
+                                where p != null 
+                                group p by p.Team ?? "Unknown Team" into teamGroup 
+                                select new { Team = teamGroup.Key, Players = teamGroup.Select(p => p.Name ?? "Unknown Player") }; 
             foreach (var group in groupedByTeam)
             {
                 Console.WriteLine(group.Team + ": " + string.Join(", ", group.Players));
             }
         }
-        public void MethodAvgScore(List<Player> players) {
-           var avgScore = players.Average(p => p.Scores.Sum());
-           Console.WriteLine($"The average total score is :{avgScore}");
+        public void MethodAvgScore(List<Player> players)
+        {
+            if (players == null || players.Count == 0)
+            {
+                Console.WriteLine("No players available.");
+                return;
+            }
+            var validScores = players
+                .Where(p => p != null && p.Scores != null) 
+                .Select(p => p.Scores.Any() ? p.Scores.Sum() : 0) 
+                .ToList();
+            if (validScores.Count == 0)
+            {
+                Console.WriteLine("No valid scores available.");
+                return;
+            }
+            double avgScore = validScores.Average();
+            Console.WriteLine($"The average total score is: {avgScore}");
         }
         public void QueryAvgScore(List<Player> players)
         {
-            var avgScore = (from p in players
-                            select p.Scores.Sum()).Average();
-
+            if (players == null || players.Count == 0)
+            {
+                Console.WriteLine("No players available.");
+                return;
+            }
+            var validScores = from p in players
+                              where p != null && p.Scores != null 
+                              select p.Scores.Any() ? p.Scores.Sum() : 0;
+            var scoreList = validScores.ToList();
+            if (scoreList.Count == 0)
+            {
+                Console.WriteLine("No valid scores available.");
+                return;
+            }
+            double avgScore = scoreList.Average();
             Console.WriteLine($"The average total score is: {avgScore}");
         }
-        public void MethodTotalMatches(List<Player> players) {
-            int totalMatches = players.Sum(p => p.MatchesPlayed);
-            Console.WriteLine($"The total matched played by player is: {totalMatches}");
+        public void MethodTotalMatches(List<Player> players)
+        {
+            int totalMatches = players?.Where(p => p != null)?.Sum(p => p.MatchesPlayed) ?? 0;
+            Console.WriteLine($"The total matches played by players is: {totalMatches}");
         }
         public void QueryTotalMatches(List<Player> players)
         {
-            int totalMatches = (from p in players
-                                select p.MatchesPlayed).Sum();
-
+            int totalMatches = (players?.Where(p => p != null).Select(p => p.MatchesPlayed).Sum()) ?? 0;
             Console.WriteLine($"The total matches played by players is: {totalMatches}");
         }
-        public void MethodHighestinTeam(List<Player> players) {
-            var bestinteam = players.GroupBy(p => p.Team)
-                              .Select(g => new { Team = g.Key, TotalScore = g.Sum(p => p.Scores.Sum()) })
-                              .OrderByDescending(g => g.TotalScore)
-                              .First();
-            Console.WriteLine($"Team with the highest total score: {bestinteam.Team} ({bestinteam.TotalScore} Runs)");
+        public void MethodHighestinTeam(List<Player> players)
+        {
+            if (players == null || players.Count == 0)
+            {
+                Console.WriteLine("No player data available.");
+                return;
+            }
+            var bestinteam = players
+                             .Where(p => p != null && p.Team != null) 
+                             .GroupBy(p => p.Team)
+                             .Select(g => new
+                             {
+                                 Team = g.Key,
+                                 TotalScore = g.Sum(p => (p.Scores ?? new List<int>()).Sum())
+                             })
+                             .OrderByDescending(g => g.TotalScore)
+                             .FirstOrDefault(); 
+            if (bestinteam == null)
+            {
+                Console.WriteLine("No team data available.");
+            }
+            else
+            {
+                Console.WriteLine($"Team with the highest total score: {bestinteam.Team} ({bestinteam.TotalScore} Runs)");
+            }
         }
         public void QueryHighestinTeam(List<Player> players)
         {
+            if (players == null || players.Count == 0)
+            {
+                Console.WriteLine("No player data available.");
+                return;
+            }
             var bestinteam = (from p in players
+                              where p != null && p.Team != null
                               group p by p.Team into teamGroup
                               select new
                               {
                                   Team = teamGroup.Key,
-                                  TotalScore = teamGroup.Sum(p => p.Scores.Sum())
+                                  TotalScore = teamGroup.Sum(p => (p.Scores ?? new List<int>()).Sum()) 
                               })
                               .OrderByDescending(g => g.TotalScore)
-                              .First();
-            Console.WriteLine($"Team with the highest total score: {bestinteam.Team} ({bestinteam.TotalScore} Runs)");
+                              .FirstOrDefault(); 
+            if (bestinteam == null)
+            {
+                Console.WriteLine("No team data available.");
+            }
+            else
+            {
+                Console.WriteLine($"Team with the highest total score: {bestinteam.Team} ({bestinteam.TotalScore} Runs)");
+            }
         }
     }
 }
