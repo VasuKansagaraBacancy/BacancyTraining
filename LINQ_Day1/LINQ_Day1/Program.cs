@@ -22,7 +22,7 @@ class Program
         player.Methodtotalthenby(players);
         Console.WriteLine("-------Group players by team and all player names under each team-----");
         player.MethodGroupbyteam(players);
-        Console.WriteLine("-------Average score of all players-----");
+        Console.WriteLine("-------Average score of all players is-----");
         player.MethodAvgScore(players);
         Console.WriteLine("-------Total number of matches played by all players combined-----");
         player.MethodTotalMatches(players);
