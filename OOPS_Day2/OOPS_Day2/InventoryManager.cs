@@ -13,7 +13,7 @@ namespace OOPS_Day2
         public List<Product> GetProducts()
         {
             return products;
-        }
+        }   
         void IInventoryOperations.AddProduct(StockLogger stockLogger)
         {
             try
