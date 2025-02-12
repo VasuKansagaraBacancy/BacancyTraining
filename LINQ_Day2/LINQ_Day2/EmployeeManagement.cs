@@ -14,6 +14,11 @@ namespace LINQ_Day2
             Console.WriteLine("-------------------------");
             Console.WriteLine("A report that shows each employee’s name along with the dates they were present using Method Syntax.");
             Console.WriteLine("-------------------------");
+            if (employees == null || attendances == null)
+            {
+                Console.WriteLine("Invalid input data.");
+                return;
+            }
             var methodReport = employees.Join(attendances.Where(a => a.IsPresent),
                                               emp => emp.EmployeeId,
                                               att => att.EmployeeId,
@@ -36,6 +41,11 @@ namespace LINQ_Day2
             Console.WriteLine("-------------------------");
             Console.WriteLine("A report that shows each employee’s name along with the dates they were present using Query Syntax.");
             Console.WriteLine("-------------------------");
+            if (employees == null || attendances == null)
+            {
+                Console.WriteLine("Invalid input data.");
+                return;
+            }
             var queryReport = (from emp in employees
                                join att in attendances.Where(a => a.IsPresent)
                                on emp.EmployeeId equals att.EmployeeId
@@ -57,6 +67,11 @@ namespace LINQ_Day2
             Console.WriteLine("-------------------------");
             Console.WriteLine("Each employee’s details, displaying their attendance records using Method Syntax.");
             Console.WriteLine("-------------------------");
+            if (employees == null || attendances == null)
+            {
+                Console.WriteLine("Invalid input data.");
+                return;
+            }
             var employeeAttendance = employees.GroupJoin(attendances,
                                                          emp => emp.EmployeeId,
                                                          att => att.EmployeeId,
@@ -81,6 +96,11 @@ namespace LINQ_Day2
             Console.WriteLine("-------------------------");
             Console.WriteLine("Each employee’s details, displaying their attendance records using Query Syntax.");
             Console.WriteLine("-------------------------");
+            if (employees == null || attendances == null)
+            {
+                Console.WriteLine("Invalid input data.");
+                return;
+            }
             var queryEmployeeAttendance = (from emp in employees
                                            join att in attendances on emp.EmployeeId equals att.EmployeeId into empAttGroup
                                            select new
@@ -104,6 +124,11 @@ namespace LINQ_Day2
             Console.WriteLine("-------------------------");
             Console.WriteLine("A list that pairs all employees with all attendance records using Method Syntax.");
             Console.WriteLine("-------------------------");
+            if (employees == null || attendances == null)
+            {
+                Console.WriteLine("Invalid input data.");
+                return;
+            }
             var allAttendanceRecords = employees.Join(attendances,
                                         emp => emp.EmployeeId,
                                         att => att.EmployeeId,
@@ -124,6 +149,11 @@ namespace LINQ_Day2
             Console.WriteLine("-------------------------");
             Console.WriteLine("A list that pairs all employees with all attendance records using Query Syntax.");
             Console.WriteLine("-------------------------");
+            if (employees == null || attendances == null)
+            {
+                Console.WriteLine("Invalid input data.");
+                return;
+            }
             var allAttendanceRecords = (from emp in employees
                                         join att in attendances
                                         on emp.EmployeeId equals att.EmployeeId
@@ -144,6 +174,11 @@ namespace LINQ_Day2
             Console.WriteLine("-------------------------");
             Console.WriteLine("A list that pairs with no attendance records using Method Syntax.");
             Console.WriteLine("-------------------------");
+            if (employees == null || attendances == null)
+            {
+                Console.WriteLine("Invalid input data.");
+                return;
+            }
             var allAttendanceRecords = employees.GroupJoin(attendances,
                                                           emp => emp.EmployeeId,
                                                           att => att.EmployeeId,
@@ -172,6 +207,11 @@ namespace LINQ_Day2
             Console.WriteLine("-------------------------");
             Console.WriteLine("A list that pairs with no attendance records using Query Syntax.");
             Console.WriteLine("-------------------------");
+            if (employees == null || attendances == null)
+            {
+                Console.WriteLine("Invalid input data.");
+                return;
+            }
             var allAttendanceRecords =
                 from emp in employees
                 join att in attendances
@@ -194,6 +234,11 @@ namespace LINQ_Day2
             Console.WriteLine("-------------------------");
             Console.WriteLine("Attendance Summary using Method Syntax.");
             Console.WriteLine("-------------------------");
+            if (employees == null || attendances == null)
+            {
+                Console.WriteLine("Invalid input data.");
+                return;
+            }
             var attendanceSummary = employees.GroupJoin(attendances,
                                                         emp => emp.EmployeeId,
                                                         att => att.EmployeeId,
@@ -213,6 +258,11 @@ namespace LINQ_Day2
             Console.WriteLine("-------------------------");
             Console.WriteLine("Attendance Summary using Query Syntax.");
             Console.WriteLine("-------------------------");
+            if (employees == null || attendances == null)
+            {
+                Console.WriteLine("Invalid input data.");
+                return;
+            }
             var attendanceSummary = (from emp in employees
                                      join att in attendances
                                      on emp.EmployeeId equals att.EmployeeId into att
@@ -232,6 +282,11 @@ namespace LINQ_Day2
             Console.WriteLine("-------------------------");
             Console.WriteLine("Attendance Summary using alternative Method Syntax.");
             Console.WriteLine("-------------------------");
+            if (employees == null || attendances == null)
+            {
+                Console.WriteLine("Invalid input data.");
+                return;
+            }
             var attendanceLookup = attendances.ToLookup(att => att.EmployeeId);
             var attendanceSummary = employees.Select(emp => new
             {
@@ -249,6 +304,11 @@ namespace LINQ_Day2
             Console.WriteLine("-------------------------");
             Console.WriteLine("Attendance Summary using alternative Query Syntax.");
             Console.WriteLine("-------------------------");
+            if (employees == null || attendances == null)
+            {
+                Console.WriteLine("Invalid input data.");
+                return;
+            }
             var attendanceLookup = attendances.ToLookup(att => att.EmployeeId);
             var attendanceSummary = (from emp in employees
                                      let empAttendance = attendanceLookup[emp.EmployeeId]
@@ -268,6 +328,11 @@ namespace LINQ_Day2
             Console.WriteLine("-------------------------");
             Console.WriteLine("Attendance Summary using employees who were present for at least 2 days using Method Syntax.");
             Console.WriteLine("-------------------------");
+            if (employees == null || attendances == null)
+            {
+                Console.WriteLine("Invalid input data.");
+                return;
+            }
             var result = employees
                 .Select(emp => new
                 {
@@ -292,6 +357,11 @@ namespace LINQ_Day2
             Console.WriteLine("-------------------------");
             Console.WriteLine("Attendance Summary using employees who were present for at least 2 days using Query Syntax.");
             Console.WriteLine("-------------------------");
+            if (employees == null || attendances == null)
+            {
+                Console.WriteLine("Invalid input data.");
+                return;
+            }
             var result =
                 from emp in employees
                 let totalDaysPresent =
@@ -318,6 +388,11 @@ namespace LINQ_Day2
             Console.WriteLine("-------------------------");
             Console.WriteLine("Unique Departments using Method Syntax.");
             Console.WriteLine("-------------------------");
+            if (employees == null )
+            {
+                Console.WriteLine("Invalid input data.");
+                return;
+            }
             var uniqueDepartments = employees
                          .Select(emp => emp.Department)
                          .Distinct()
@@ -332,6 +407,11 @@ namespace LINQ_Day2
             Console.WriteLine("-------------------------");
             Console.WriteLine("Unique Departments using Query Syntax.");
             Console.WriteLine("-------------------------");
+            if (employees == null)
+            {
+                Console.WriteLine("Invalid input data.");
+                return;
+            }
             var uniqueDepartments = (from emp in employees
                                      select emp.Department)
                                      .Distinct()
@@ -346,6 +426,11 @@ namespace LINQ_Day2
             Console.WriteLine("-------------------------");
             Console.WriteLine("Merge two lists of employees using Method Syntax.");
             Console.WriteLine("-------------------------");
+            if (employees == null || otheremployees == null)
+            {
+                Console.WriteLine("Invalid input data.");
+                return;
+            }
             var mergedEmployees = employees
            .Concat(otheremployees)
            .DistinctBy(emp => emp.Name) 
@@ -360,6 +445,11 @@ namespace LINQ_Day2
             Console.WriteLine("-------------------------");
             Console.WriteLine("Merge two lists of employees using Query Syntax.");
             Console.WriteLine("-------------------------");
+            if (employees == null || otheremployees == null)
+            {
+                Console.WriteLine("Invalid input data.");
+                return;
+            }
             var mergedEmployees = (from emp in employees.Concat(otheremployees)
                                    group emp by emp.Name into empGroup
                                    select empGroup.First())
@@ -374,6 +464,11 @@ namespace LINQ_Day2
             Console.WriteLine("-------------------------");
             Console.WriteLine("Intersect two lists of employees using Method Syntax.");
             Console.WriteLine("-------------------------");
+            if (employees == null || otheremployees == null)
+            {
+                Console.WriteLine("Invalid input data.");
+                return;
+            }
             var commonEmployees = employees.Join(otheremployees,
                                                  emp1 => emp1.Name,  
                                                  emp2 => emp2.Name,
@@ -388,6 +483,11 @@ namespace LINQ_Day2
             Console.WriteLine("-------------------------");
             Console.WriteLine("Intersect two lists of employees using Query Syntax.");
             Console.WriteLine("-------------------------");
+            if (employees == null || otheremployees == null)
+            {
+                Console.WriteLine("Invalid input data.");
+                return;
+            }
             var commonEmployees = (from emp1 in employees
                                    join emp2 in otheremployees
                                    on emp1.Name equals emp2.Name
@@ -402,6 +502,11 @@ namespace LINQ_Day2
             Console.WriteLine("-------------------------");
             Console.WriteLine("Employees present in the first list but not in the second using Method Syntax.");
             Console.WriteLine("-------------------------");
+            if (employees == null || otheremployees == null)
+            {
+                Console.WriteLine("Invalid input data.");
+                return;
+            }
             var uniqueEmployees = employees.ExceptBy(otheremployees
                                            .Select(emp => emp.Name), emp => emp.Name).ToList();
             foreach (var emp in uniqueEmployees)
@@ -414,6 +519,11 @@ namespace LINQ_Day2
             Console.WriteLine("-------------------------");
             Console.WriteLine("Employees present in the first list but not in the second using Query Syntax.");
             Console.WriteLine("-------------------------");
+            if (employees == null || otheremployees == null)
+            {
+                Console.WriteLine("Invalid input data.");
+                return;
+            }
             var uniqueEmployees = (from emp in employees
                                    where !(from other in otheremployees
                                            select other.Name)
@@ -429,6 +539,11 @@ namespace LINQ_Day2
             Console.WriteLine("-------------------------");
             Console.WriteLine("Deffered execution example using Method Syntax.");
             Console.WriteLine("-------------------------");
+            if (employees == null)
+            {
+                Console.WriteLine("Invalid input data.");
+                return;
+            }
             var employeeNamesQuery = employees.Select(emp => emp.Name);  
             employees.Add(new Employee(11, "Karan", "IT")); 
             foreach (var name in employeeNamesQuery)
@@ -441,6 +556,11 @@ namespace LINQ_Day2
             Console.WriteLine("-------------------------");
             Console.WriteLine("Deffered execution example using Query Syntax.");
             Console.WriteLine("-------------------------");
+            if (employees == null)
+            {
+                Console.WriteLine("Invalid input data.");
+                return;
+            }
             var employeeNamesQuery = from emp in employees
                                      select emp.Name;
             employees.Add(new Employee(11, "Karan", "IT"));
@@ -454,6 +574,11 @@ namespace LINQ_Day2
             Console.WriteLine("-------------------------");
             Console.WriteLine("Immediate execution example using Method Syntax.");
             Console.WriteLine("-------------------------");
+            if (employees == null)
+            {
+                Console.WriteLine("Invalid input data.");
+                return;
+            }
             var employeeNamesQuery = employees.Select(emp => emp.Name).ToList();
             employees.Add(new Employee(11, "Karan", "IT"));
             foreach (var name in employeeNamesQuery)
@@ -466,6 +591,11 @@ namespace LINQ_Day2
             Console.WriteLine("-------------------------");
             Console.WriteLine("Immediate execution example using Query Syntax.");
             Console.WriteLine("-------------------------");
+            if (employees == null)
+            {
+                Console.WriteLine("Invalid input data.");
+                return;
+            }
             var employeeNamesQuery = (from emp in employees
                                       select emp.Name).ToList();
             employees.Add(new Employee(11, "Karan", "IT"));
