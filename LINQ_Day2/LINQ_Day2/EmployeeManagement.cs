@@ -96,7 +96,7 @@ namespace LINQ_Day2
             {
                 Console.WriteLine($"Employee: {item.Name}, Department: {item.Department}");
                 Console.WriteLine("Attendance Dates: " + (item.AttendanceDates.Any() ? string.Join(", ", item.AttendanceDates) : "No attendance records"));
-
+                Console.WriteLine();
             }
         }
         public void MethodAllAttendanceRecords(List<Employee> employees, List<Attendance> attendances)
@@ -244,7 +244,7 @@ namespace LINQ_Day2
                 Console.WriteLine($"Employee: {record.Name}, Department: {record.Department}, Total Days Present: {record.TotalDaysPresent}");
             }
         }
-        public void QueyAlterAttendanceSummary(List<Employee> employees, List<Attendance> attendances)
+        public void QueryAlterAttendanceSummary(List<Employee> employees, List<Attendance> attendances)
         {
             Console.WriteLine("-------------------------");
             Console.WriteLine("Attendance Summary using alternative Query Syntax.");
