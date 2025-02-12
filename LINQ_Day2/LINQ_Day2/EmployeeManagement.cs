@@ -424,7 +424,7 @@ namespace LINQ_Day2
                 Console.WriteLine(emp.Name);
             }
         }
-        public void MethodDeffered(List<Employee> employees)
+        public void MethodDeferred(List<Employee> employees)
         {
             Console.WriteLine("-------------------------");
             Console.WriteLine("Deffered execution example using Method Syntax.");
@@ -436,7 +436,7 @@ namespace LINQ_Day2
                 Console.WriteLine(name);
             }
         }
-        public void QueryDeffered(List<Employee> employees)
+        public void QueryDeferred(List<Employee> employees)
         {
             Console.WriteLine("-------------------------");
             Console.WriteLine("Deffered execution example using Query Syntax.");

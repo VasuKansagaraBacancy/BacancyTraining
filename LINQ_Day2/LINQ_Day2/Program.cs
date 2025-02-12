@@ -29,8 +29,8 @@ class Program
         employeeManagement.QueryIntersect(employees, otheremployees);
         employeeManagement.MethodFirst(employees, otheremployees);
         employeeManagement.QueryFirst(employees, otheremployees);
-        employeeManagement.MethodDeffered(employees);
-        employeeManagement.QueryDeffered(employees);
+        employeeManagement.MethodDeferred(employees);
+        employeeManagement.QueryDeferred(employees);
         employeeManagement.MethodImmediate(employees);
         employeeManagement.QueryImmediate(employees);
     }
