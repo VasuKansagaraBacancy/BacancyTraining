@@ -452,7 +452,7 @@ namespace LINQ_Day2
             }
             var mergedEmployees = (from emp in employees.Concat(otheremployees)
                                    group emp by emp.Name into empGroup
-                                   select empGroup.First())
+                                   select empGroup.FirstOrDefault())
                                   .ToList();
             foreach (var emp in mergedEmployees)
             {
