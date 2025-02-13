@@ -27,7 +27,7 @@ namespace LINQ_Day2
                                               .Select(g => new
                                               {
                                                   EmployeeName = g.Key,
-                                                  DatesPresent = g.Select(x => x.Date).ToList()
+                                                  DatesPresent = g.Select(x => x.Date.ToShortDateString()).ToList()
                                               }).ToList();
             foreach (var item in methodReport)
             {
@@ -53,7 +53,7 @@ namespace LINQ_Day2
                                select new
                                {
                                    EmployeeName = empGroup.Key,
-                                   DatesPresent = empGroup.Select(x => x.Date).ToList()
+                                   DatesPresent = empGroup.Select(x => x.Date.ToShortDateString()).ToList()
                                }).ToList();
             foreach (var item in queryReport)
             {
@@ -81,7 +81,7 @@ namespace LINQ_Day2
                                                              emp.Name,
                                                              emp.Department,
                                                              AttendanceDates = att.Where(a => a.IsPresent)
-                                                                                         .Select(a => a.Date)
+                                                                                         .Select(a => a.Date.ToShortDateString())
                                                                                          .ToList()
                                                          }).ToList();
             foreach (var item in employeeAttendance)
@@ -109,7 +109,7 @@ namespace LINQ_Day2
                                                emp.Name,
                                                emp.Department,
                                                AttendanceDates = empAttGroup.Where(a => a.IsPresent)
-                                                                            .Select(a => a.Date)
+                                                                            .Select(a => a.Date.ToShortDateString())
                                                                             .ToList()
                                            }).ToList();
             foreach (var item in queryEmployeeAttendance)
@@ -141,7 +141,8 @@ namespace LINQ_Day2
                                         }).ToList();
             foreach (var item in allAttendanceRecords)
             {
-                Console.WriteLine($"Employee: {item.Name}, Department: {item.Department}, Date: {item.Date}, Attendance: {item.WasPresent}");
+                Console.WriteLine($"Employee: {item.Name}\nDepartment: {item.Department}\nDate: {item.Date.ToShortDateString()}\nAttendance: {item.WasPresent}");
+                Console.WriteLine("------------");
             }
         }
         public void QueryAllAttendanceRecords(List<Employee> employees, List<Attendance> attendances)
@@ -166,7 +167,8 @@ namespace LINQ_Day2
                                         }).ToList();
             foreach (var item in allAttendanceRecords)
             {
-                Console.WriteLine($"Employee: {item.Name}, Department: {item.Department}, Date: {item.Date}, Attendance: {item.WasPresent}");
+                Console.WriteLine($"Employee: {item.Name} \nDepartment: {item.Department} \nDate: {item.Date.ToShortDateString()} \nAttendance: {item.WasPresent}");
+                Console.WriteLine("------------");
             }
         }
         public void MethodAttendanceRecords(List<Employee> employees, List<Attendance> attendances)
@@ -194,12 +196,13 @@ namespace LINQ_Day2
                                                           {
                                                               entry.Name,
                                                               entry.Department,
-                                                              Date = att?.Date.ToString() ?? "N/A",
+                                                              Date = att?.Date.ToShortDateString() ?? "N/A",
                                                               WasPresent = att?.IsPresent == true ? "Present" : att == null ? "No Record" : "Absent"
                                                           }).ToList();
             foreach (var item in allAttendanceRecords)
             {
-                Console.WriteLine($"Employee: {item.Name}, Department: {item.Department}, Date: {item.Date}, Attendance: {item.WasPresent}");
+                Console.WriteLine($"Employee: {item.Name}\nDepartment: {item.Department}\nDate: {item.Date}\nAttendance: {item.WasPresent}");
+                Console.WriteLine("------------");
             }
         }
         public void QueryAttendanceRecords(List<Employee> employees, List<Attendance> attendances)
@@ -221,12 +224,13 @@ namespace LINQ_Day2
                 {
                     emp.Name,
                     emp.Department,
-                    Date = att != null ? att.Date.ToString() : "N/A",
+                    Date = att != null ? att.Date.ToShortDateString() : "N/A",
                     WasPresent = att != null ? (att.IsPresent ? "Present" : "Absent") : "No Record"
                 };
             foreach (var item in allAttendanceRecords)
             {
-                Console.WriteLine($"Employee: {item.Name}, Department: {item.Department}, Date: {item.Date}, Attendance: {item.WasPresent}");
+                Console.WriteLine($"Employee: {item.Name} \nDepartment: {item.Department} \nDate: {item.Date} \nAttendance: {item.WasPresent}");
+                Console.WriteLine("------------");
             }
         }
         public void MethodAttendanceSummary(List<Employee> employees, List<Attendance> attendances)
@@ -250,7 +254,8 @@ namespace LINQ_Day2
                                                         }).ToList();
             foreach (var record in attendanceSummary)
             {
-                Console.WriteLine($"Employee: {record.Name}, Department: {record.Department}, Total Days Present: {record.TotalDaysPresent}");
+                Console.WriteLine($"Employee: {record.Name} \nDepartment: {record.Department} \nTotal Days Present: {record.TotalDaysPresent}");
+                Console.WriteLine("------------");
             }
         }
         public void QueryAttendanceSummary(List<Employee> employees, List<Attendance> attendances)
@@ -274,7 +279,8 @@ namespace LINQ_Day2
                                      }).ToList();
             foreach (var record in attendanceSummary)
             {
-                Console.WriteLine($"Employee: {record.Name}, Department: {record.Department}, Total Days Present: {record.TotalDaysPresent}");
+                Console.WriteLine($"Employee: {record.Name}  \nDepartment: {record.Department} \nTotal Days Present: {record.TotalDaysPresent}");
+                Console.WriteLine("------------");
             }
         }
         public void MethodAlterAttendanceSummary(List<Employee> employees, List<Attendance> attendances)
@@ -296,7 +302,8 @@ namespace LINQ_Day2
             }).ToList();
             foreach (var record in attendanceSummary)
             {
-                Console.WriteLine($"Employee: {record.Name}, Department: {record.Department}, Total Days Present: {record.TotalDaysPresent}");
+                Console.WriteLine($"Employee: {record.Name} \nDepartment: {record.Department} \nTotal Days Present: {record.TotalDaysPresent}");
+                Console.WriteLine("------------");
             }
         }
         public void QueryAlterAttendanceSummary(List<Employee> employees, List<Attendance> attendances)
@@ -320,7 +327,8 @@ namespace LINQ_Day2
                                      }).ToList();
             foreach (var record in attendanceSummary)
             {
-                Console.WriteLine($"Employee: {record.Name}, Department: {record.Department}, Total Days Present: {record.TotalDaysPresent}");
+                Console.WriteLine($"Employee: {record.Name} \nDepartment: {record.Department} \nTotal Days Present: {record.TotalDaysPresent}");
+                Console.WriteLine("------------");
             }
         }
         public void MethodEmployeesWithMinimumAttendance(List<Employee> employees, List<Attendance> attendances, int month, int year)
@@ -349,7 +357,8 @@ namespace LINQ_Day2
                 .ToList();
             foreach (var employee in result)
             {
-                Console.WriteLine($"Employee: {employee.Name}, Department: {employee.Department}, Total Days Present: {employee.TotalDaysPresent}");
+                Console.WriteLine($"Employee: {employee.Name} \nDepartment: {employee.Department} \nTotal Days Present: {employee.TotalDaysPresent}");
+                Console.WriteLine("------------");
             }
         }
         public void QueryEmployeesWithMinimumAttendance(List<Employee> employees, List<Attendance> attendances, int month, int year)
@@ -380,7 +389,8 @@ namespace LINQ_Day2
                 };
             foreach (var employee in result)
             {
-                Console.WriteLine($"Employee: {employee.Name}, Department: {employee.Department}, Total Days Present: {employee.TotalDaysPresent}");
+                Console.WriteLine($"Employee: {employee.Name} \nDepartment: {employee.Department} \nTotal Days Present: {employee.TotalDaysPresent}");
+                Console.WriteLine("------------");
             }
         }
         public void MethodUniqueDepartment(List<Employee> employees)
