@@ -75,12 +75,12 @@ namespace LINQ_Day2
             var employeeAttendance = employees.GroupJoin(attendances,
                                                          emp => emp.EmployeeId,
                                                          att => att.EmployeeId,
-                                                         (emp, attRecords) => new
+                                                         (emp, att) => new
                                                          {
                                                              emp.EmployeeId,
                                                              emp.Name,
                                                              emp.Department,
-                                                             AttendanceDates = attRecords.Where(a => a.IsPresent)
+                                                             AttendanceDates = att.Where(a => a.IsPresent)
                                                                                          .Select(a => a.Date)
                                                                                          .ToList()
                                                          }).ToList();
