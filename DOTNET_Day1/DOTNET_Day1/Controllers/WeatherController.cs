@@ -2,33 +2,25 @@
 
 namespace DOTNET_Day1.Controllers
 {
-
-    [Route("ap1/[controller]")]
     [ApiController]
-    public class LocationAPI : Controller
+    [Route("[controller]")]   
+    public class OpenWeatherController : ControllerBase
     {
-        [HttpPost]
-            public IActionResult WeatherPost([FromBody] LocationRequest request)
+        [HttpGet("{latitude}/{longitude}")]
+        public IActionResult Get(float longitude, float latitude)
+        {
+            if (!OpenWeather.StationDictionary.TryGetClosestStation(latitude, longitude, out var stationInfo))
             {
-                if (!OpenWeather.StationDictionary.TryGetClosestStation(request.Lat, request.Long, out var stationInfo))
-                {
-                    Console.WriteLine("Could not find a station.");
-                    return NotFound("ERROR");
-                }
-
-                var weather = new LocationInfo
-                {
-                    Name = stationInfo.Name,
-                    ICAO = stationInfo.ICAO,
-                    Lat = stationInfo.Latitude,
-                    Long = stationInfo.Longitude,
-                    Elevation = stationInfo.Elevation,
-                    Country = stationInfo.Country,
-                };
-
-                return Ok(weather.ToString());
+                return BadRequest("Could not find a station.");
             }
+            string text = $"STATION NAME : {stationInfo.Name}\nCOUNTRY : {stationInfo.Country}\n";
 
+            var loaction = new LocationRequest
+            {
+                Name = stationInfo.Name,
+                Country = stationInfo.Country
+            };
+            return Ok(loaction);
         }
-    
+    }
 }
