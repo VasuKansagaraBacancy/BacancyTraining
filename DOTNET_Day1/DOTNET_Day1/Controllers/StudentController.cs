@@ -18,7 +18,6 @@ namespace DOTNET_Day1.Controllers
         {
             try
             {
-   
                 Student.students.AddRange(newStudents);
 
                 string filePath = "studentData.txt";
