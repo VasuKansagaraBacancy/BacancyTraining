@@ -1,35 +1,42 @@
-using DOTNET_Day2.Middlewares;
+﻿using DOTNET_Day2.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-var app = builder.Build();
-IConfiguration configuration = app.Configuration;
 
+var configuration = builder.Configuration;
 string key = configuration.GetSection("Tokens:key").Value;
-Console.WriteLine(key);
+Console.WriteLine($"Token Key: {key}");
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("ConfigureCors", policy =>
+    {
+        Console.WriteLine($"Inside CORS Policy - Token Key: {key}"); 
+    });
+});
+
+var app = builder.Build();
+
+app.UseCors("ConfigureCors");
 
 app.UseErrorHandlerMiddleware();
-
 app.UseCustomMiddleware();
 
 app.Use(async (context, next) =>
 {
-    await context.Response.WriteAsync("use method middleware");
+    Console.WriteLine($"Middleware - Token Key: {key}");
+    await context.Response.WriteAsync("use method middleware\n");
     await next();
 });
 
 app.Run(async (context) =>
 {
-    await context.Response.WriteAsync("run method middleware");
+    await context.Response.WriteAsync("run method middleware\n");
 });
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -37,9 +44,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
