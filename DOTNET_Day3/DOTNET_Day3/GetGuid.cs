@@ -5,7 +5,6 @@ namespace DOTNET_Day3
     public class GuidService : IGetGuidSingleton, IGetGuidScoped, IGetGuidTransient
     {
         private readonly Guid _guid;
-
         public GuidService()
         {
             _guid = Guid.NewGuid();

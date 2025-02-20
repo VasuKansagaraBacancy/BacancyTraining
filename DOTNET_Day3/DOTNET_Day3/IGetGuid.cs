@@ -6,5 +6,4 @@
         public interface IGetGuidScoped { Guid GetGuid(); }
         public interface IGetGuidTransient { Guid GetGuid(); }
     }
-
 }

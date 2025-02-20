@@ -4,7 +4,6 @@
         {
         void SaveStudentsToFile(string filePath, List<Student> students);
         List<Student> RetriveStudentData();
-
     }
 
 }
