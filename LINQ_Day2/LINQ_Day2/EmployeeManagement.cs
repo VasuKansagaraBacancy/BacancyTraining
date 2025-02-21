@@ -11,9 +11,7 @@ namespace LINQ_Day2
     {
         public void MethodReport(List<Employee> employees, List<Attendance> attendances)
         {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("A report that shows each employee’s name along with the dates they were present using Method Syntax.");
-            Console.WriteLine("-------------------------");
+            PrintHeader("A report that shows each employee’s name along with the dates they were present using Method Syntax.");
             if (employees == null || attendances == null)
             {
                 Console.WriteLine("Invalid input data.");
@@ -38,9 +36,7 @@ namespace LINQ_Day2
         }
         public void QueryReport(List<Employee> employees, List<Attendance> attendances)
         {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("A report that shows each employee’s name along with the dates they were present using Query Syntax.");
-            Console.WriteLine("-------------------------");
+            PrintHeader("A report that shows each employee’s name along with the dates they were present using Query Syntax.");
             if (employees == null || attendances == null)
             {
                 Console.WriteLine("Invalid input data.");
@@ -64,9 +60,7 @@ namespace LINQ_Day2
         }
         public void MethodEmployeeAttendance(List<Employee> employees, List<Attendance> attendances)
         {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("Each employee’s details, displaying their attendance records using Method Syntax.");
-            Console.WriteLine("-------------------------");
+            PrintHeader("Each employee’s details, displaying their attendance records using Method Syntax.");
             if (employees == null || attendances == null)
             {
                 Console.WriteLine("Invalid input data.");
@@ -93,9 +87,7 @@ namespace LINQ_Day2
         }
         public void QueryEmployeeAttendance(List<Employee> employees, List<Attendance> attendances)
         {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("Each employee’s details, displaying their attendance records using Query Syntax.");
-            Console.WriteLine("-------------------------");
+            PrintHeader("Each employee’s details, displaying their attendance records using Query Syntax.");
             if (employees == null || attendances == null)
             {
                 Console.WriteLine("Invalid input data.");
@@ -121,9 +113,7 @@ namespace LINQ_Day2
         }
         public void MethodAllAttendanceRecords(List<Employee> employees, List<Attendance> attendances)
         {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("A list that pairs all employees with all attendance records using Method Syntax.");
-            Console.WriteLine("-------------------------");
+            PrintHeader("A list that pairs all employees with all attendance records using Method Syntax.");
             if (employees == null || attendances == null)
             {
                 Console.WriteLine("Invalid input data.");
@@ -147,9 +137,7 @@ namespace LINQ_Day2
         }
         public void QueryAllAttendanceRecords(List<Employee> employees, List<Attendance> attendances)
         {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("A list that pairs all employees with all attendance records using Query Syntax.");
-            Console.WriteLine("-------------------------");
+            PrintHeader("A list that pairs all employees with all attendance records using Query Syntax.");
             if (employees == null || attendances == null)
             {
                 Console.WriteLine("Invalid input data.");
@@ -173,9 +161,7 @@ namespace LINQ_Day2
         }
         public void MethodAttendanceRecords(List<Employee> employees, List<Attendance> attendances)
         {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("A list that pairs with no attendance records using Method Syntax.");
-            Console.WriteLine("-------------------------");
+            PrintHeader("A list that pairs with no attendance records using Method Syntax.");
             if (employees == null || attendances == null)
             {
                 Console.WriteLine("Invalid input data.");
@@ -207,9 +193,7 @@ namespace LINQ_Day2
         }
         public void QueryAttendanceRecords(List<Employee> employees, List<Attendance> attendances)
         {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("A list that pairs with no attendance records using Query Syntax.");
-            Console.WriteLine("-------------------------");
+            PrintHeader("A list that pairs with no attendance records using Query Syntax.");
             if (employees == null || attendances == null)
             {
                 Console.WriteLine("Invalid input data.");
@@ -235,9 +219,7 @@ namespace LINQ_Day2
         }
         public void MethodAttendanceSummary(List<Employee> employees, List<Attendance> attendances)
         {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("Attendance Summary using Method Syntax.");
-            Console.WriteLine("-------------------------");
+            PrintHeader("Attendance Summary using Method Syntax");
             if (employees == null || attendances == null)
             {
                 Console.WriteLine("Invalid input data.");
@@ -260,9 +242,7 @@ namespace LINQ_Day2
         }
         public void QueryAttendanceSummary(List<Employee> employees, List<Attendance> attendances)
         {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("Attendance Summary using Query Syntax.");
-            Console.WriteLine("-------------------------");
+            PrintHeader("Attendance Summary using Query Syntax");
             if (employees == null || attendances == null)
             {
                 Console.WriteLine("Invalid input data.");
@@ -285,9 +265,7 @@ namespace LINQ_Day2
         }
         public void MethodAlterAttendanceSummary(List<Employee> employees, List<Attendance> attendances)
         {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("Attendance Summary using alternative Method Syntax.");
-            Console.WriteLine("-------------------------");
+            PrintHeader("Attendance Summary using alternative Method Syntax");
             if (employees == null || attendances == null)
             {
                 Console.WriteLine("Invalid input data.");
@@ -308,9 +286,7 @@ namespace LINQ_Day2
         }
         public void QueryAlterAttendanceSummary(List<Employee> employees, List<Attendance> attendances)
         {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("Attendance Summary using alternative Query Syntax.");
-            Console.WriteLine("-------------------------");
+            PrintHeader("Attendance Summary using alternative Query Syntax");
             if (employees == null || attendances == null)
             {
                 Console.WriteLine("Invalid input data.");
@@ -333,28 +309,24 @@ namespace LINQ_Day2
         }
         public void MethodEmployeesWithMinimumAttendance(List<Employee> employees, List<Attendance> attendances, int month, int year)
         {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("Attendance Summary using employees who were present for at least 2 days using Method Syntax.");
-            Console.WriteLine("-------------------------");
+            PrintHeader("Attendance Summary - Employees with at least 2 days of attendance using Method Syntax");
             if (employees == null || attendances == null)
             {
                 Console.WriteLine("Invalid input data.");
                 return;
             }
-            var result = employees
-                .Select(emp => new
-                {
-                    emp.Name,
-                    emp.Department,
-                    TotalDaysPresent = attendances
-                        .Where(att => att.EmployeeId == emp.EmployeeId
-                                      && att.Date.Month == month
-                                      && att.Date.Year == year
-                                      && att.IsPresent)
-                        .Count()
-                })
-                .Where(emp => emp.TotalDaysPresent >= 2)
-                .ToList();
+            var result = employees.Where(emp => attendances.Any(att => att.EmployeeId == emp.EmployeeId && att.Date.Month == month && att.Date.Year == year)) 
+                                  .Select(emp => new
+                                  {
+                                      emp.Name,
+                                      emp.Department,
+                                      TotalDaysPresent = attendances.Count(att => att.EmployeeId == emp.EmployeeId 
+                                                                           && att.Date.Month == month 
+                                                                           && att.Date.Year == year 
+                                                                           && att.IsPresent) 
+                                  })
+        .Where(emp => emp.TotalDaysPresent >= 2) 
+        .ToList();
             foreach (var employee in result)
             {
                 Console.WriteLine($"Employee: {employee.Name} \nDepartment: {employee.Department} \nTotal Days Present: {employee.TotalDaysPresent}");
@@ -363,9 +335,7 @@ namespace LINQ_Day2
         }
         public void QueryEmployeesWithMinimumAttendance(List<Employee> employees, List<Attendance> attendances, int month, int year)
         {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("Attendance Summary using employees who were present for at least 2 days using Query Syntax.");
-            Console.WriteLine("-------------------------");
+            PrintHeader("Attendance Summary - Employees with at least 2 days of attendance using Query Syntax");
             if (employees == null || attendances == null)
             {
                 Console.WriteLine("Invalid input data.");
@@ -395,9 +365,7 @@ namespace LINQ_Day2
         }
         public void MethodUniqueDepartment(List<Employee> employees)
         {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("Unique Departments using Method Syntax.");
-            Console.WriteLine("-------------------------");
+            PrintHeader("Unique Departments using Method Syntax.");
             if (employees == null )
             {
                 Console.WriteLine("Invalid input data.");
@@ -414,9 +382,7 @@ namespace LINQ_Day2
         }
         public void QueryUniqueDepartment(List<Employee> employees)
         {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("Unique Departments using Query Syntax.");
-            Console.WriteLine("-------------------------");
+            PrintHeader("Unique Departments using Query Syntax.");
             if (employees == null)
             {
                 Console.WriteLine("Invalid input data.");
@@ -433,9 +399,7 @@ namespace LINQ_Day2
         }
         public void MethodMerge(List<Employee> employees, List<Employee> otheremployees)
         {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("Merge two lists of employees using Method Syntax.");
-            Console.WriteLine("-------------------------");
+            PrintHeader("Merge two lists of employees using Method Syntax.");
             if (employees == null || otheremployees == null)
             {
                 Console.WriteLine("Invalid input data.");
@@ -452,9 +416,7 @@ namespace LINQ_Day2
         }
         public void QueryMerge(List<Employee> employees, List<Employee> otheremployees)
         {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("Merge two lists of employees using Query Syntax.");
-            Console.WriteLine("-------------------------");
+            PrintHeader("Merge two lists of employees using Query Syntax.");
             if (employees == null || otheremployees == null)
             {
                 Console.WriteLine("Invalid input data.");
@@ -471,28 +433,25 @@ namespace LINQ_Day2
         }
         public void MethodIntersect(List<Employee> employees, List<Employee> otheremployees)
         {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("Intersect two lists of employees using Method Syntax.");
-            Console.WriteLine("-------------------------");
+            PrintHeader("Intersect two lists of employees using Method Syntax.");
             if (employees == null || otheremployees == null)
             {
                 Console.WriteLine("Invalid input data.");
                 return;
             }
-            var commonEmployees = employees.Join(otheremployees,
-                                                 emp1 => emp1.Name,  
-                                                 emp2 => emp2.Name,
-                                                (emp1, emp2) => emp1).ToList();
-            foreach (var emp in commonEmployees) 
-            { 
-                Console.WriteLine(emp.Name); 
+
+            var commonEmployees = employees
+                .IntersectBy(otheremployees.Select(emp => emp.Name), emp => emp.Name)
+                .ToList();
+
+            foreach (var emp in commonEmployees)
+            {
+                Console.WriteLine(emp.Name);
             }
         }
         public void QueryIntersect(List<Employee> employees, List<Employee> otheremployees)
         {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("Intersect two lists of employees using Query Syntax.");
-            Console.WriteLine("-------------------------");
+            PrintHeader("Intersect two lists of employees using Query Syntax.");
             if (employees == null || otheremployees == null)
             {
                 Console.WriteLine("Invalid input data.");
@@ -509,9 +468,7 @@ namespace LINQ_Day2
         }
         public void MethodFirst(List<Employee> employees, List<Employee> otheremployees)
         {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("Employees present in the first list but not in the second using Method Syntax.");
-            Console.WriteLine("-------------------------");
+            PrintHeader("Employees present in the first list but not in the second using Method Syntax.");
             if (employees == null || otheremployees == null)
             {
                 Console.WriteLine("Invalid input data.");
@@ -526,9 +483,7 @@ namespace LINQ_Day2
         }
         public void QueryFirst(List<Employee> employees, List<Employee> otheremployees)
         {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("Employees present in the first list but not in the second using Query Syntax.");
-            Console.WriteLine("-------------------------");
+            PrintHeader("Employees present in the first list but not in the second using Query Syntax.");
             if (employees == null || otheremployees == null)
             {
                 Console.WriteLine("Invalid input data.");
@@ -546,9 +501,7 @@ namespace LINQ_Day2
         }
         public void MethodDeferred(List<Employee> employees)
         {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("Deffered execution example using Method Syntax.");
-            Console.WriteLine("-------------------------");
+            PrintHeader("Deffered execution example using Method Syntax."); 
             if (employees == null)
             {
                 Console.WriteLine("Invalid input data.");
@@ -563,9 +516,7 @@ namespace LINQ_Day2
         }
         public void QueryDeferred(List<Employee> employees)
         {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("Deffered execution example using Query Syntax.");
-            Console.WriteLine("-------------------------");
+            PrintHeader("Deffered execution example using Query Syntax.");
             if (employees == null)
             {
                 Console.WriteLine("Invalid input data.");
@@ -581,9 +532,7 @@ namespace LINQ_Day2
         }
         public void MethodImmediate(List<Employee> employees)
         {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("Immediate execution example using Method Syntax.");
-            Console.WriteLine("-------------------------");
+            PrintHeader("Immediate execution example using Method Syntax.");
             if (employees == null)
             {
                 Console.WriteLine("Invalid input data.");
@@ -598,9 +547,7 @@ namespace LINQ_Day2
         }
         public void QueryImmediate(List<Employee> employees)
         {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine("Immediate execution example using Query Syntax.");
-            Console.WriteLine("-------------------------");
+            PrintHeader("Immediate execution example using Query Syntax.");
             if (employees == null)
             {
                 Console.WriteLine("Invalid input data.");
@@ -613,6 +560,12 @@ namespace LINQ_Day2
             {
                 Console.WriteLine(name);
             }
+        }
+        private void PrintHeader(string title)
+        {
+            Console.WriteLine(new string('-', 25)); 
+            Console.WriteLine(title);
+            Console.WriteLine(new string('-', 25));
         }
     }
 }
