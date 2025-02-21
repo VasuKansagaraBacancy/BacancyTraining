@@ -16,7 +16,7 @@ namespace schoolmanage
         public void AddClass(string className, string section,int assignedteacherid)
         {
             classes.Add(new standard(className, section,assignedteacherid));
-        }
+        }Updated
 
         public void ViewAllClasses()
         {
