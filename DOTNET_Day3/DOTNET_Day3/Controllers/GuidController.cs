@@ -10,7 +10,6 @@ namespace DOTNET_Day3.Controllers
         private readonly IGetGuidSingleton _singletonGuid;
         private readonly IGetGuidScoped _scopedGuid;
         private readonly IGetGuidTransient _transientGuid;
-
         public GuidController(IGetGuidSingleton singletonGuid,IGetGuidScoped scopedGuid,IGetGuidTransient transientGuid)
         {
             _singletonGuid = singletonGuid;
