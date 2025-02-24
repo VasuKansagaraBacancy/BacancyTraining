@@ -1,7 +1,6 @@
 ﻿using DOTNET_Day5;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
 [Route("api/students")]
 [ApiController]
 public class StudentController : ControllerBase
@@ -31,5 +30,12 @@ public class StudentController : ControllerBase
     {
         _studentService.UpdateStudent(id, student);
         return Ok(new { Message = "Student updated successfully!" });
+    }
+    [Authorize]
+    [HttpDelete("{id}")]
+    public IActionResult DeleteStudent(int id)
+    {
+        _studentService.DeleteStudent(id);
+        return Ok(new { Message = "Student Deleted successfully!" });
     }
 }

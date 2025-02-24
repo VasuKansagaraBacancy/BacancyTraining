@@ -1,6 +1,5 @@
 ﻿using DOTNET_Day5;
 using Microsoft.AspNetCore.Mvc;
-
 [Route("api/auth")]
 [ApiController]
 public class AuthController : ControllerBase

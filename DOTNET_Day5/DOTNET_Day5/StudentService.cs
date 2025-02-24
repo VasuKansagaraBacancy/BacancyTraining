@@ -13,4 +13,12 @@ public class StudentService : IStudentService
             student.Age = updatedStudent.Age;
         }
     }
+    public void DeleteStudent(int id)
+    {
+        var student = _students.FirstOrDefault(s => s.Id == id);
+        if (student != null)
+        {
+            _students.Remove(student);
+        }
+    }
 }

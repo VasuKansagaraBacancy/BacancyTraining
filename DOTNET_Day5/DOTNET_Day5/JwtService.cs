@@ -20,12 +20,10 @@ public class JwtService : IJwtService
     {
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_key));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
         var claims = new List<Claim>
         {
             new Claim(ClaimTypes.Name, username)
         };
-
         var token = new JwtSecurityToken(
             issuer: _issuer,
             audience: _audience,
@@ -33,7 +31,6 @@ public class JwtService : IJwtService
             expires: DateTime.UtcNow.AddMinutes(_expiryMinutes),
             signingCredentials: credentials
         );
-
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
 }
