@@ -10,6 +10,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+string environment = builder.Environment.EnvironmentName;
+string connectionString = environment switch
+{
+    "Development" => builder.Configuration.GetConnectionString("Development"),
+    "Production" => builder.Configuration.GetConnectionString("Production")
+};
+builder.Services.AddDbContext<EFCoreDBContext>(options =>
+    options.UseSqlServer(connectionString));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
