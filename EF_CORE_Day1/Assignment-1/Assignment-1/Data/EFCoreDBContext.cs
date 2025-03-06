@@ -5,8 +5,8 @@ namespace Assignment_1.Data
 {
     public class EFCoreDBContext : DbContext
     {
-        public EFCoreDBContext(DbContextOptions<EFCoreDBContext> options) : base(options)
-        {
+        public EFCoreDBContext()
+        {           
         }
         public DbSet<Student> Students { get; set; }
     }
