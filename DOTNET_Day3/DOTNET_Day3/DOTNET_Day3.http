@@ -1,6 +1,0 @@
-@DOTNET_Day3_HostAddress = http://localhost:5038
-
-GET {{DOTNET_Day3_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
