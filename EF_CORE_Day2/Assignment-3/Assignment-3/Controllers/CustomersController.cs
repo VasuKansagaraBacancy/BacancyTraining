@@ -1,6 +1,7 @@
 ﻿using Assignment_3.Data;
 using Assignment_3.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Assignment_3.Controllers
 {
@@ -9,34 +10,81 @@ namespace Assignment_3.Controllers
     public class CustomersController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+
         public CustomersController(ApplicationDbContext context)
         {
-           _context=context;
+            _context = context;
         }
+
         [HttpGet]
-        public IActionResult GetCustomers()
+        public async Task<IActionResult> GetCustomers()
         {
-            var customers=_context.Customers.ToList();
+            var customers = await _context.Customers
+                .Select(c => new CustomerDto
+                {
+                    CustomerId = c.CustomerId,
+                    Name = c.Name
+                })
+                .ToListAsync();
+
             return Ok(customers);
         }
+
+
         [HttpPost]
-        public IActionResult AddCustomer([FromBody]Customer customer)
+        public async Task<IActionResult> AddCustomer([FromBody] CustomerDto customerDto)
         {
-            _context.Customers.Add(customer);
-            _context.SaveChanges();
-            return Ok(customer);
-        }
-        [HttpDelete("{id}")]
-        public IActionResult DeleteCustomer(int id)
-        {
-            var customer = _context.Customers.Find(id);
-            if (customer == null)
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var customer = new Customer
             {
-                return NotFound(); 
-            }
-            _context.Customers.Remove(customer);
-            _context.SaveChanges();
-            return Ok(new { message = "Customer deleted successfully" });
+                Name = customerDto.Name
+            };
+
+            _context.Customers.Add(customer);
+            await _context.SaveChangesAsync();
+
+            return Ok(new CustomerDto
+            {
+                CustomerId = customer.CustomerId,
+                Name = customer.Name
+            });
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateCustomer(int id, [FromBody] CustomerDto customerDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var customer = await _context.Customers.FirstOrDefaultAsync(c => c.CustomerId == id);
+
+            if (customer == null)
+                return NotFound(new { message = $"Customer with ID {id} not found." });
+
+            customer.Name = customerDto.Name;
+
+            _context.Customers.Update(customer);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Customer Updated successfully." });
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCustomer(int id)
+        {
+            var customer = await _context.Customers.FirstOrDefaultAsync(c => c.CustomerId == id);
+
+            if (customer == null)
+                return NotFound(new { message = $"Customer with ID {id} not found." });
+
+            customer.IsDeleted = true;
+
+            _context.Customers.Update(customer);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Customer soft-deleted successfully." });
         }
     }
 }
