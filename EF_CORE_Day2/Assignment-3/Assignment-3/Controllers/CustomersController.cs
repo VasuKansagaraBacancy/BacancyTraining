@@ -89,17 +89,18 @@ namespace Assignment_3.Controllers
         [HttpDelete("PermanentDeleteUser/{id}")]
         public async Task<IActionResult> PermanentDeleteUser(int id)
         {
-            var existingUser = await _context.Customers.FirstOrDefaultAsync(u => u.CustomerId == id);
+            var existingUser = await _context.Customers.IgnoreQueryFilters().FirstOrDefaultAsync(u => u.CustomerId == id);
 
             if (existingUser == null)
             {
                 return NotFound($"User with ID {id} not found.");
             }
-
+            if(!existingUser.IsDeleted)
+            {
+                return BadRequest("You ahve to perform soft delete first");
+            }
             _context.Customers.Remove(existingUser);
-
             await _context.SaveChangesAsync();
-
             return Ok($"Customer with ID {id} permanent deleted successfully.");
         }
     }
