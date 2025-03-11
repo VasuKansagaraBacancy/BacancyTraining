@@ -84,7 +84,23 @@ namespace Assignment_3.Controllers
             _context.Customers.Update(customer);
             await _context.SaveChangesAsync();
 
-            return Ok(new { message = "Customer soft-deleted successfully." });
+            return Ok(new { message = "Customer soft-   deleted successfully." });
+        }
+        [HttpDelete("PermanentDeleteUser/{id}")]
+        public async Task<IActionResult> PermanentDeleteUser(int id)
+        {
+            var existingUser = await _context.Customers.FirstOrDefaultAsync(u => u.CustomerId == id);
+
+            if (existingUser == null)
+            {
+                return NotFound($"User with ID {id} not found.");
+            }
+
+            _context.Customers.Remove(existingUser);
+
+            await _context.SaveChangesAsync();
+
+            return Ok($"Customer with ID {id} permanent deleted successfully.");
         }
     }
 }
