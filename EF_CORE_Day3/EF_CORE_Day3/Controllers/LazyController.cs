@@ -84,8 +84,5 @@ namespace EF_CORE_Day3.Controllers
 
             return Ok(qualifyingOrders);
         }
-
-
-
     }
 }
