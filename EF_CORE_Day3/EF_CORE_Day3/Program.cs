@@ -2,7 +2,7 @@
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -14,9 +14,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseLazyLoadingProxies() // Enable lazy loading proxies
-           .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")) // Your connection string from appsettings.json
-           .LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information); // Logging SQL queries
+    options.UseLazyLoadingProxies()
+           .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")) 
+           .LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information); 
 });
 
 
@@ -32,15 +32,12 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 
-// Migrate & Seed dynamic data
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-    // Apply any pending migrations
     context.Database.Migrate();
 
-    // Seed dynamic data
     context.SeedDynamicData();
 }
 
