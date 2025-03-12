@@ -48,8 +48,7 @@ namespace EF_CORE_Day3.Controllers
             {
                 OrderId = order.Id,
                 OrderDate = order.OrderDate,
-                IsDeleted = order.IsDeleted,
-                LoadOrderProducts = $"Call '/api/ExplicitLoading/LoadOrderProducts/{order.Id}' to load OrderProducts"
+                IsDeleted = order.IsDeleted
             });
 
             return Ok(result);
