@@ -12,4 +12,5 @@ namespace Medicare__.Repositories
         Task DeleteAsync(Appointment appointment);
         Task<Appointment?> GetByIdAsync(int appointmentId);
     }
+
 }
