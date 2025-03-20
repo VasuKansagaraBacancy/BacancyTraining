@@ -9,6 +9,7 @@ namespace Medicare__.Repositories
         Task<Appointment> CreateAsync(Appointment appointment);
         Task<Appointment?> UpdateAsync(Appointment appointment);
         Task<IEnumerable<AppointmentDetailsDto>> GetAllWithDetailsAsync();
+
         Task DeleteAsync(Appointment appointment);
         Task<Appointment?> GetByIdAsync(int appointmentId);
     }
